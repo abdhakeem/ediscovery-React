@@ -81,7 +81,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .css-pb771q-MuiInputBase-inpu
 }
 
 .page-title {
-    color: #1e0040;
+    color: #000;
 }
 
 .form-control {
@@ -102,4 +102,35 @@ label[data-shrink=false]+.MuiInputBase-formControl .css-pb771q-MuiInputBase-inpu
 
 .ag-theme-alpine .ag-icon-filter::before {
     color: #26034e !important;
+}
+
+.HeaderContent {
+    background: #323232;
+    padding-right: var(--tblr-gutter-x,1.5rem);
+    padding-left: var(--tblr-gutter-x,1.5rem);
+    width: 100%;color: #fff;
+    background-image: url('/src/assets/images/hp-header.gif') !important;
+    background-size: cover;
+    background-position: 94% 37%;
+    margin-bottom: 30px;
+    border-radius: 3px;
+}
+
+.HeaderContent-title {
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: -1px;
+    margin: 0px;
+}
+
+
+.HeaderContent-paragraph {
+    font-size: 16px;
+    margin: 0px;
+    font-weight: 500;
+}
+
+.HeaderContent-container {
+    padding: 40px 20px;
+    display: grid;
 }

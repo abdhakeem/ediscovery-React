@@ -12,10 +12,13 @@ import { AgGridColumn, AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import 'ag-grid-enterprise';
+import 'ag-grid-community/dist/styles/ag-grid.css';
+import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
+
 
 import 'src/style.css';
 
-function DashboardCrypto() {
+function DashboardLogin() {
 
   const [rowData, setRowData] = useState([]);
   const gridRef = useRef(null);
@@ -29,8 +32,8 @@ function DashboardCrypto() {
    const [columnDefs] = useState([
        //{ field: "make", sortable: true, filter: true, checkboxSelection: true, floatingFilter: true, rowGroup: false, rowDrag: false, width: 300 },
        { headerName: 'S. NO', field: "id", sortable: true, filter: true, checkboxSelection: true, floatingFilter: true, rowGroup: false, rowDrag: false, headerCheckboxSelection: true, width: 150 },
-       { headerName: 'CASE ID', field: "caseId", sortable: true, filter: true, floatingFilter: true, width: 400 },
-       { headerName: 'CASE NAME', field: "projectname", sortable: true, filter: true, floatingFilter: true, width: 400 },
+       { headerName: 'CASE ID', field: "caseId", sortable: true, filter: true, floatingFilter: true, width: 400},
+       { headerName: 'CASE NAME', field: "projectname", sortable: true, filter: true, floatingFilter: true, width: 400},
        { headerName: 'CASE CREATED (PST)', field: "created_at", sortable: true, filter: true, floatingFilter: true, width: 250 },
 
    ]);   
@@ -63,6 +66,27 @@ function DashboardCrypto() {
 
   const groupDisplayType = 'singleColumn';   
 
+  //const sideBar = true;
+
+  const sideBar = {
+    toolPanels: [
+        {
+            id: 'columns',
+            labelDefault: 'Columns',
+            labelKey: 'columns',
+            iconKey: 'columns',
+            toolPanel: 'agColumnsToolPanel',
+        },
+        {
+            id: 'filters',
+            labelDefault: 'Filters',
+            labelKey: 'filters',
+            iconKey: 'filter',
+            toolPanel: 'agFiltersToolPanel',
+        }
+    ],
+    defaultToolPanel: 'columns',
+};
 
 
   return (
@@ -71,7 +95,15 @@ function DashboardCrypto() {
         <title>Inabia - eDiscovery</title>
       </Helmet>
       <PageTitleWrapper>
+      <div data-v-4fb88474="" className="HeaderContent center-content">      
+        <div className="HeaderContent-container">
+                  <h1 className="HeaderContent-title" >Welcome to Inabia Ebot</h1>
+                  <h3 className="HeaderContent-paragraph">Create new cases and extract results</h3>
+        </div>
+      </div> 
         <PageHeader />
+
+      
       </PageTitleWrapper>
       <Container maxWidth="lg">
         <Grid
@@ -82,7 +114,7 @@ function DashboardCrypto() {
           spacing={3}
         >
           <Grid item lg={12} xs={12}>
-          <div className="ag-theme-alpine" style={{height: 500, width: '100%'}}>
+          <div className="ag-theme-alpine" style={{height: 600, width: '100%'}}>
           <AgGridReact
                 ref={gridRef}
                 rowData={rowData}
@@ -102,6 +134,8 @@ function DashboardCrypto() {
                 enableRangeSelection={true}
                 enableFillHandle={enableFillHandle}
                 groupDisplayType={groupDisplayType}
+                sideBar={sideBar}
+                
                 
                 // rowDragManaged={true}  //Doesn't work with pagination
         
@@ -117,4 +151,4 @@ function DashboardCrypto() {
   );
 }
 
-export default DashboardCrypto;
+export default DashboardLogin;
