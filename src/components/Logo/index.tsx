@@ -102,18 +102,22 @@ function Logo() {
 
   return (
     <LogoWrapper to="/overview">
-      <LogoSignWrapper>
-        <LogoSign>
-          <LogoSignInner />
-        </LogoSign>
+      <LogoSignWrapper style={{marginRight: 50, marginBottom: 10 }}>
+      <img
+        alt="Inabia ediscovery"
+        height={70}
+        src="/static/images/inabia_ai_logo.png"
+          />
+  
       </LogoSignWrapper>
       <Hidden smDown>
-        <LogoTextWrapper>
-          <Tooltip title="Version 1.1.0" arrow placement="right">
-            <VersionBadge>1.1</VersionBadge>
+        <LogoTextWrapper style={{ paddingTop: 10 }}>
+          <Tooltip title="Version 1.1.0" arrow placement="right" >
+            <VersionBadge>1.0</VersionBadge>
           </Tooltip>
-          <LogoText>Inabia - eDiscovery</LogoText>
+          <LogoText>eDiscovery</LogoText>
         </LogoTextWrapper>
+        
       </Hidden>
     </LogoWrapper>
   );

@@ -15,7 +15,8 @@ const Loader = (Component) => (props) => (
 
 // Pages
 
-const Overview = Loader(lazy(() => import('src/content/overview')));
+const Authentication = Loader(lazy(() => import('src/content/authentication/login')));
+const Register = Loader(lazy(() => import('src/content/authentication/register')));
 
 // Dashboards
 
@@ -55,16 +56,24 @@ const routes: PartialRouteObject[] = [
     children: [
       {
         path: '/',
-        element: <Overview />
+        element: <Authentication />
       },
       {
-        path: 'overview',
-        element: (
-          <Navigate
-            to="/"
-            replace
-          />
-        )
+        path: 'login',
+        element: <Authentication />
+      },
+      // {
+      //   path: '/',
+      //   element: <Register />
+      // },
+      {
+        path: 'register',
+        children: [
+          {
+            path: '/',
+            element: <Register />
+          }
+        ]
       },
       {
         path: 'status',

@@ -77,7 +77,7 @@ function HeaderMenu() {
 
   return (
     <>
-      <ListWrapper>
+      {/* <ListWrapper>
         <List disablePadding component={Box} display="flex">
           <ListItem
             classes={{ root: 'MuiListItem-indicators' }}
@@ -134,7 +134,7 @@ function HeaderMenu() {
         <MenuItem sx={{ px: 3 }} component={NavLink} to="/components/modals">
           Modals
         </MenuItem>
-      </Menu>
+      </Menu> */}
     </>
   );
 }

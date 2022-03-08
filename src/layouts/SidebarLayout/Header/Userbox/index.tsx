@@ -58,16 +58,26 @@ const UserBoxDescription = styled(Typography)(
 `
 );
 
+const user =
+  {
+    email: localStorage.getItem('email'),
+    avatar: '/static/images/avatars/3.jpg',
+    jobtitle: 'admin'
+  };
+
+
 function HeaderUserbox() {
 
-  const username = localStorage.getItem('username');
+  const email = localStorage.getItem('email');
 
   const user =
   {
-    name: username,
-    avatar: '/static/images/avatars/1.jpg',
-    jobtitle: 'Project Manager'
+    email: email,
+    avatar: '/static/images/avatars/3.jpg',
+    jobtitle: 'admin'
   };
+
+
 
   const ref = useRef<any>(null);
   const [isOpen, setOpen] = useState<boolean>(false);
@@ -83,10 +93,10 @@ function HeaderUserbox() {
   return (
     <>
       <UserBoxButton color="secondary" ref={ref} onClick={handleOpen}>
-        <Avatar variant="rounded" alt={user.name} src={user.avatar} />
+        <Avatar variant="rounded" alt={user.email} src={user.avatar} />
         <Hidden mdDown>
           <UserBoxText>
-            <UserBoxLabel variant="body1">{user.name}</UserBoxLabel>
+            <UserBoxLabel variant="body1">{user.email}</UserBoxLabel>
             <UserBoxDescription variant="body2">
               {user.jobtitle}
             </UserBoxDescription>
@@ -110,16 +120,16 @@ function HeaderUserbox() {
         }}
       >
         <MenuUserBox sx={{ minWidth: 210 }} display="flex">
-          <Avatar variant="rounded" alt={user.name} src={user.avatar} />
+          <Avatar variant="rounded" alt={user.email} src={user.avatar} />
           <UserBoxText>
-            <UserBoxLabel variant="body1">{user.name}</UserBoxLabel>
+            <UserBoxLabel variant="body1">{user.email}</UserBoxLabel>
             <UserBoxDescription variant="body2">
               {user.jobtitle}
             </UserBoxDescription>
           </UserBoxText>
         </MenuUserBox>
         <Divider sx={{ mb: 0 }} />
-        <List sx={{ p: 1 }} component="nav">
+        {/* <List sx={{ p: 1 }} component="nav">
           <ListItem button to="/management/profile/details" component={NavLink}>
             <AccountBoxTwoToneIcon fontSize="small" />
             <ListItemText primary="My Profile" />
@@ -140,10 +150,10 @@ function HeaderUserbox() {
             <AccountTreeTwoToneIcon fontSize="small" />
             <ListItemText primary="Account Settings" />
           </ListItem>
-        </List>
+        </List> */}
         <Divider />
         <Box sx={{ m: 1 }}>
-          <a href="/overview">
+          <a href="/login">
           <Button color="primary" fullWidth >
 
             <LockOpenTwoToneIcon sx={{ mr: 1 }} />

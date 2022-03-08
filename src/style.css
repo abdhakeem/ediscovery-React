@@ -22,14 +22,58 @@
     background-color: #3a0478;
 }
 
-
-
 .login-bg {
-    background-image: url(/src/assets/images/bg5-4.jpg);
+    background-image: url(/src/assets/images/bg5-4.jpg) !important;
     min-height: 100vh;
     width: 100%;
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
     padding: 40px;
+}
+
+.main-content {
+    height: 100%;
+    display: flex;
+    flex: 1;
+    overflow: auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.ag-header-container {
+    width: 100% !important;
+}
+
+.ag-theme-alpine .ag-header-row {
+    width: 100% !important;
+    background: #1e0040;
+    color: #fff !important;
+}
+
+img {
+    image-rendering: -moz-crisp-edges !important;
+    image-rendering: -o-crisp-edges !important;
+    image-rendering: -webkit-optimize-contrast !important;
+    -ms-interpolation-mode: nearest-neighbor !important;
+}
+
+a {
+    color: #1e0040;
+}
+
+label[data-shrink=false]+.MuiInputBase-formControl .css-pb771q-MuiInputBase-input-MuiOutlinedInput-input {
+    background: white  !important;
+}
+
+.theme-btn {
+    background: #1e0040;
+    color: #fff;
+    text-shadow: none;
+    font-weight: 500;
+}
+
+.page-title {
+    color: #1e0040;
 }
