@@ -4,11 +4,6 @@ import PageTitleWrapper from 'src/components/PageTitleWrapper';
 import { Grid, Container } from '@mui/material';
 import Footer from 'src/components/Footer';
 
-import AccountBalance from './AccountBalance';
-import Wallets from './Wallets';
-import AccountSecurity from './AccountSecurity';
-import WatchList from './WatchList';
-
 import { useEffect, useMemo, useState, useRef, useCallback } from 'react';
 import { render } from 'react-dom';
 
@@ -22,42 +17,53 @@ import 'src/style.css';
 
 function DashboardCrypto() {
 
-  const containerStyle = useMemo(() => ({ width: '100%', height: '500px' }), []);
-  const gridStyle = useMemo(() => ({ height: '100%', width: '100%' }), []);
-  const [rowData, setRowData] = useState();
-  const [columnDefs, setColumnDefs] = useState([
-    { headerName: 'Case ID', field: 'caseId', rowGroup: true, hide: false, width: 150 },
-    { headerName: 'Case Name', field: 'projectname', rowGroup: true, hide: false, width: 150 },
-    // { headerName: 'S. NO', field: 'gold', aggFunc: 'sum' },
-    // { headerName: 'S. NO', field: 'silver', aggFunc: 'sum' },
-    // { headerName: 'S. NO',field: 'bronze', aggFunc: 'sum' },
-    // { headerName: 'S. NO', field: 'age', minWidth: 120, aggFunc: 'sum' },
-    { headerName: 'Company', field: 'company',  width: 250 },
-    { headerName: 'Create at', field: 'created_at',  width: 150 },
-  ]);
-  const defaultColDef = useMemo(() => {
-    return {
-      flex: 1,
-      minWidth: 100,
-    };
-  }, []);
-  const autoGroupColumnDef = useMemo(() => {
-    return {
-      headerName: 'S. NO',
-      field: 'id',
-      minWidth: 250,
-      cellRenderer: 'agGroupCellRenderer',
-      cellRendererParams: {
-        checkbox: true,
-      },
-    };
-  }, []);
+  const [rowData, setRowData] = useState([]);
+  const gridRef = useRef(null);
 
-  const onGridReady = useCallback((params) => {
-    fetch('https://ediscovery.inabia.ai/api/getcases?userId=1&type=Cases&caseId=&fileId=')
-      .then((resp) => resp.json())
-      .then((data) => setRowData(data));
-  }, []);
+  const defaultColDef = {
+    // set filtering on for all columns
+    filter: true,
+    resizable: true,
+  };
+
+   const [columnDefs] = useState([
+       //{ field: "make", sortable: true, filter: true, checkboxSelection: true, floatingFilter: true, rowGroup: false, rowDrag: false, width: 300 },
+       { headerName: 'S. NO', field: "id", sortable: true, filter: true, checkboxSelection: true, floatingFilter: true, rowGroup: false, rowDrag: false, headerCheckboxSelection: true, width: 150 },
+       { headerName: 'CASE ID', field: "caseId", sortable: true, filter: true, floatingFilter: true, width: 400 },
+       { headerName: 'CASE NAME', field: "projectname", sortable: true, filter: true, floatingFilter: true, width: 400 },
+       { headerName: 'CASE CREATED (PST)', field: "created_at", sortable: true, filter: true, floatingFilter: true, width: 250 },
+
+   ]);   
+   
+    const enableFillHandle = true;
+
+   useEffect(() => {
+          //fetch('https://www.ag-grid.com/example-assets/row-data.json')
+          fetch('https://ediscovery.inabia.ai/api/getcases?userId=1&type=Cases&caseId=5&fileId=215')
+           .then(result => result.json())
+           .then(rowData => setRowData(rowData))
+   }, []);
+
+  //     const onButtonClick = e => {
+  //     const selectedNodes = gridRef.current.api.getSelectedNodes()
+  //     const selectedData = selectedNodes.map( node => node.data )
+  //     const selectedDataStringPresentation = selectedData.map( node => `${node.make} ${node.model}`).join(', ')
+  //     alert(`Selected nodes: ${selectedDataStringPresentation}`)
+  // }
+  
+  const autoGroupColumnDef = useMemo(()=> ({
+        filter: true,
+          // supplies 'country' values to the filter 
+        filterValueGetter: params => params.data.model,  
+        field: "model", // show model in group column at leaf levels
+        cellRendererParams: {
+        checkbox: true // put in checkbox selection in group column
+         }
+     }), [])
+
+  const groupDisplayType = 'singleColumn';   
+
+
 
   return (
     <>
@@ -76,21 +82,33 @@ function DashboardCrypto() {
           spacing={3}
         >
           <Grid item lg={12} xs={12}>
-          <div style={containerStyle}>
-      <div style={gridStyle} className="ag-theme-alpine">
+          <div className="ag-theme-alpine" style={{height: 500, width: '100%'}}>
           <AgGridReact
-            rowData={rowData}
-            columnDefs={columnDefs}
-            defaultColDef={defaultColDef}
-            autoGroupColumnDef={autoGroupColumnDef}
-            rowSelection={'multiple'}
-            groupSelectsChildren={true}
-            suppressRowClickSelection={true}
-            suppressAggFuncInHeader={true}
-            onGridReady={onGridReady}
-          ></AgGridReact>
+                ref={gridRef}
+                rowData={rowData}
+                columnDefs={columnDefs}
+                rowSelection="multiple"
+                groupSelectsChildren={true}
+                pagination={true}
+                autoGroupColumnDef={autoGroupColumnDef}
+                enableCellTextSelection={true}
+                paginationPageSize={30}
+                cacheBlockSize={30}
+                // paginationAutoPageSize={true}
+                paginateChildRows={true}
+                ensureDomOrder={true}
+                rowMultiSelectWithClick={true}
+                defaultColDef={defaultColDef}
+                enableRangeSelection={true}
+                enableFillHandle={enableFillHandle}
+                groupDisplayType={groupDisplayType}
+                
+                // rowDragManaged={true}  //Doesn't work with pagination
+        
+                >
+           </AgGridReact>
         </div>
-      </div>
+      
             </Grid>
         </Grid>
       </Container>

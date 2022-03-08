@@ -1,21 +1,13 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
-import { useTheme } from '@mui/material/styles';
 import {Box, Typography} from '@mui/material';
 import AddTwoToneIcon from '@mui/icons-material/AddTwoTone'; 
 import { Container, Grid, Card, CardHeader, CardContent, Divider } from '@mui/material';
 import Button from '@mui/material/Button';
-import Avatar from '@mui/material/Avatar';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import ListItemText from '@mui/material/ListItemText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
-import PersonIcon from '@mui/icons-material/Person';
-import AddIcon from '@mui/icons-material/Add';
-import { blue } from '@mui/material/colors';
+import TextField from '@mui/material/TextField';
 
 
 const emails = ['username@gmail.com', 'user02@gmail.com'];
@@ -34,7 +26,54 @@ function SimpleDialog(props) {
   return (
     <Dialog onClose={handleClose} open={open}>
       <DialogTitle>Create Case </DialogTitle>
-      <List sx={{ pt: 0 }}>
+      <Grid item xs={12}>
+            <Card>
+              <Divider />
+              <CardContent>
+                <Box
+                  component="form"
+                  sx={{
+                    '& .MuiTextField-root': { m: 1, width: '25ch' },
+                  }}
+                  noValidate
+                  autoComplete="off"
+                >
+                  <div>
+                  <TextField
+                      id="outlined-password-input"
+                      label="Shery"
+                      type="password"
+                      autoComplete="current-password"
+                    />
+                  
+                  <TextField
+                      id="outlined-password-input"
+                      label="Shery"
+                      type="password"
+                      autoComplete="current-password"
+                    />
+                  
+                  <TextField
+                      id="outlined-password-input"
+                      label="Shery"
+                      type="password"
+                      autoComplete="current-password"
+                    />
+
+                  <TextField
+                      id="outlined-password-input"
+                      label="Shery"
+                      type="password"
+                      autoComplete="current-password"
+                    />
+
+                  </div>
+                  
+                </Box>
+              </CardContent>
+            </Card>
+          </Grid>
+      {/* <List sx={{ pt: 0 }}>
         {emails.map((email) => (
           <ListItem button onClick={() => handleListItemClick(email)} key={email}>
             <ListItemAvatar>
@@ -54,7 +93,7 @@ function SimpleDialog(props) {
           </ListItemAvatar>
           <ListItemText primary="Add account" />
         </ListItem>
-      </List>
+      </List> */}
     </Dialog>
   );
 }
