@@ -138,7 +138,7 @@ function LoginUser() {
           localStorage.setItem('token' , logintoken);
           localStorage.setItem('userId' , loginid);
 
-          navigate('/dashboards/crypto');
+          navigate('/dashboards/cases');
 
       }
 

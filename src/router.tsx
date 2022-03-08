@@ -20,7 +20,7 @@ const Register = Loader(lazy(() => import('src/content/authentication/register')
 
 // Dashboards
 
-const Crypto = Loader(lazy(() => import('src/content/dashboards/Crypto')));
+const Cases = Loader(lazy(() => import('src/content/dashboards/Cases')));
 
 // Applications
 
@@ -121,14 +121,14 @@ const routes: PartialRouteObject[] = [
         path: '/',
         element: (
           <Navigate
-            to="/dashboards/crypto"
+            to="/dashboards/cases"
             replace
           />
         )
       },
       {
-        path: 'crypto',
-        element: <Crypto />
+        path: 'cases',
+        element: <Cases />
       },
       {
         path: 'messenger',

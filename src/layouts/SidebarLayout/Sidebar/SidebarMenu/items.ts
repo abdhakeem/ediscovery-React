@@ -45,7 +45,7 @@ const menuItems: MenuItems[] = [
     items: [
       {
         name: 'Cases',
-        link: '/dashboards/crypto',
+        link: '/dashboards/cases',
         icon: BrightnessLowTwoToneIcon
       },
       // {

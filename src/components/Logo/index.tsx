@@ -101,7 +101,7 @@ function Logo() {
 
 
   return (
-    <LogoWrapper to="/overview">
+    <LogoWrapper to="/dashboards/cases">
       <LogoSignWrapper style={{marginRight: 50, marginBottom: 10 }}>
       <img
         alt="Inabia ediscovery"
