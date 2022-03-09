@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-import PageHeader from './PageHeader';
+import PageHeader from './DocHeader';
 import PageTitleWrapper from 'src/components/PageTitleWrapper';
 import { Grid, Container } from '@mui/material';
 import Footer from 'src/components/Footer';
@@ -23,8 +23,8 @@ import { useNavigate, useParams } from 'react-router';
 
 function DashboardLogin() {
 
-  const {id} = useParams();
-  console.log(id);
+  const {docid} = useParams();
+  console.log(docid);
   const userId = localStorage.getItem('userId');
   const [rowData, setRowData] = useState([]);
   const gridRef = useRef(null);
@@ -35,20 +35,20 @@ function DashboardLogin() {
     resizable: true,
   };
 
-   const [columnDefs] = useState([
-       //{ field: "make", sortable: true, filter: true, checkboxSelection: true, floatingFilter: true, rowGroup: false, rowDrag: false, width: 300 },
-       { headerName: 'S. NO', field: "id", sortable: true, filter: true, checkboxSelection: true, floatingFilter: true, rowGroup: false, rowDrag: false, headerCheckboxSelection: true, width: 150 },
-       { headerName: 'CASE ID', field: "caseId", sortable: true, filter: true, floatingFilter: true, width: 400},
-       { headerName: 'CASE NAME', field: "projectname", sortable: true, filter: true, floatingFilter: true, width: 400},
-       { headerName: 'CASE CREATED (PST)', field: "created_at", sortable: true, filter: true, floatingFilter: true, width: 250 },
+  const [columnDefs] = useState([
+    //{ field: "make", sortable: true, filter: true, checkboxSelection: true, floatingFilter: true, rowGroup: false, rowDrag: false, width: 300 },
+    { headerName: 'S. NO', field: "id", sortable: true, filter: true, checkboxSelection: true, floatingFilter: true, rowGroup: false, rowDrag: false, headerCheckboxSelection: true, width: 150 },
+    { headerName: 'DOCUMENT NAME', field: "collectionname", sortable: true, filter: true, floatingFilter: true, width: 400},
+    { headerName: 'UPLOADED ON', field: "created_at", sortable: true, filter: true, floatingFilter: true, width: 400},
+    { headerName: 'STATUS', field: "status", sortable: true, filter: true, floatingFilter: true, width: 250 },
 
-   ]);   
+]);   
    
     const enableFillHandle = true;
 
    useEffect(() => {
           //fetch('https://www.ag-grid.com/example-assets/row-data.json')
-          fetch('https://ediscovery.inabia.ai/api/getcases?userId='+userId+'&type=Docs&caseId='+id+'&fileId=')
+          fetch('https://ediscovery.inabia.ai/api/getcases?userId='+userId+'&type=Docs&caseId='+docid+'&fileId=')
            .then(result => result.json())
            .then(rowData => setRowData(rowData))
          
@@ -60,7 +60,7 @@ function DashboardLogin() {
   let navigate = useNavigate(); 
 
   const onCellClicked = (params: CellClickedEvent ) => { 
-    let path = '/dashboards/documents/'+ params.data.id; 
+    let path = '/dashboards/files/'+ docid +'/' + params.data.id; 
     navigate(path);
   };
 

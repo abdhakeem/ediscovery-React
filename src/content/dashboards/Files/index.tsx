@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-import PageHeader from './PageHeader';
+import PageHeader from './FileHeader';
 import PageTitleWrapper from 'src/components/PageTitleWrapper';
 import { Grid, Container } from '@mui/material';
 import Footer from 'src/components/Footer';
@@ -19,10 +19,14 @@ import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import 'src/style.css';
 import { CellClickedEvent } from 'ag-grid-community';
 import id from 'date-fns/esm/locale/id/index.js';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 
 function DashboardLogin() {
 
+  const {docid} = useParams();
+  console.log(docid);
+  const {fileid} = useParams();
+  console.log(fileid);
   const userId = localStorage.getItem('userId');
   const [rowData, setRowData] = useState([]);
   const gridRef = useRef(null);
@@ -35,10 +39,13 @@ function DashboardLogin() {
 
    const [columnDefs] = useState([
        //{ field: "make", sortable: true, filter: true, checkboxSelection: true, floatingFilter: true, rowGroup: false, rowDrag: false, width: 300 },
-       { headerName: 'S. NO', field: "id", sortable: true, filter: true, checkboxSelection: true, floatingFilter: true, rowGroup: false, rowDrag: false, headerCheckboxSelection: true, width: 150 },
-       { headerName: 'CASE ID', field: "caseId", sortable: true, filter: true, floatingFilter: true, width: 400},
-       { headerName: 'CASE NAME', field: "projectname", sortable: true, filter: true, floatingFilter: true, width: 400},
-       { headerName: 'CASE CREATED (PST)', field: "created_at", sortable: true, filter: true, floatingFilter: true, width: 250 },
+       { headerName: 'FILE ID', field: "id", sortable: true, filter: true, checkboxSelection: true, floatingFilter: true, rowGroup: false, rowDrag: false, headerCheckboxSelection: true },
+       { headerName: 'FILE NAME', field: "orgfilename", sortable: true, filter: true, floatingFilter: true},
+       { headerName: 'UPLOADED ON', field: "created_at", sortable: true, filter: true, floatingFilter: true},
+       { headerName: 'STATUS', field: "status", sortable: true, filter: true, floatingFilter: true, cellRenderer: function(params) {
+        return params.value ? params.value : '';
+    } },
+       { headerName: 'ACTIONS', field: "action", sortable: true, filter: true, floatingFilter: true },
 
    ]);   
    
@@ -46,13 +53,13 @@ function DashboardLogin() {
 
    useEffect(() => {
           //fetch('https://www.ag-grid.com/example-assets/row-data.json')
-          fetch('https://ediscovery.inabia.ai/api/getcases?userId='+userId+'&type=Cases&caseId=5&fileId=215')
+          fetch('https://ediscovery.inabia.ai/api/getcases?userId='+userId+'&type=Files&caseId='+docid+'&fileId='+fileid)
            .then(result => result.json())
            .then(rowData => setRowData(rowData))
          
    }, []);
 
-   //console.log(rowData[0]['caseId']);
+  console.log(rowData);
   // const onCellClicked = (params: CellClickedEvent ) => alert(params.data.id);
 
   let navigate = useNavigate(); 

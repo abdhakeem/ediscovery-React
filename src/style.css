@@ -134,3 +134,20 @@ label[data-shrink=false]+.MuiInputBase-formControl .css-pb771q-MuiInputBase-inpu
     padding: 40px 20px;
     display: grid;
 }
+
+
+.ag-theme-alpine .ag-icon-previous::before {
+    color: #000 !important;
+}
+
+.ag-theme-alpine .ag-icon-next::before {
+    color: #000 !important;
+}
+
+.ag-theme-alpine .ag-icon-first::before {
+    color: #000 !important;
+}
+
+.ag-theme-alpine .ag-icon-last::before {
+    color: #000 !important;
+}
