@@ -19,10 +19,13 @@ import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import 'src/style.css';
 import { CellClickedEvent } from 'ag-grid-community';
 import id from 'date-fns/esm/locale/id/index.js';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 
 function DashboardLogin() {
 
+  const {id} = useParams();
+  console.log(id);
+  const userId = localStorage.getItem('userId');
   const [rowData, setRowData] = useState([]);
   const gridRef = useRef(null);
   //const props = [];
@@ -45,13 +48,13 @@ function DashboardLogin() {
 
    useEffect(() => {
           //fetch('https://www.ag-grid.com/example-assets/row-data.json')
-          fetch('https://ediscovery.inabia.ai/api/getcases?userId=1&type=Cases&caseId=5&fileId=215')
+          fetch('https://ediscovery.inabia.ai/api/getcases?userId='+userId+'&type=Docs&caseId='+id+'&fileId=')
            .then(result => result.json())
            .then(rowData => setRowData(rowData))
          
    }, []);
 
-   //console.log(rowData[0]['caseId']);
+  console.log(rowData);
   // const onCellClicked = (params: CellClickedEvent ) => alert(params.data.id);
 
   let navigate = useNavigate(); 

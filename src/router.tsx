@@ -133,7 +133,7 @@ const routes: PartialRouteObject[] = [
       },
       ,
       {
-        path: 'documents/1',
+        path: 'documents/:id',
         element: <Documents />
       },
       {
