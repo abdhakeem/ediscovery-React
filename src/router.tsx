@@ -134,11 +134,11 @@ const routes: PartialRouteObject[] = [
       },
       ,
       {
-        path: 'documents/:docid',
+        path: 'documents/:caseid/:docid',
         element: <Documents />
       },
       {
-        path: 'files/:docid/:fileid',
+        path: 'files/:caseid/:docid/:fileid',
         element: <Files />
       },
       {
