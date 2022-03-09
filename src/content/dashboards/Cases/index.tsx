@@ -19,6 +19,7 @@ import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import 'src/style.css';
 import { CellClickedEvent } from 'ag-grid-community';
 import id from 'date-fns/esm/locale/id/index.js';
+import { useNavigate } from 'react-router';
 
 function DashboardLogin() {
 
@@ -51,7 +52,20 @@ function DashboardLogin() {
    }, []);
 
    //console.log(rowData[0]['caseId']);
-   const onCellClicked = (params: CellClickedEvent ) => alert(params.value);
+  // const onCellClicked = (params: CellClickedEvent ) => alert(params.data.id);
+
+  let navigate = useNavigate(); 
+
+  const onCellClicked = (params: CellClickedEvent ) => { 
+    let path = '/dashboards/documents/'+ params.data.id; 
+    navigate(path);
+  };
+
+  // const routeChange = () =>{ 
+  //   let path = '/dashboards/documents/57'; 
+  //   navigate(path);
+  // }
+  //  const onCellClicked = (params: CellClickedEvent ) => alert(rowData[0]['caseId']);
 
   //     const onButtonClick = e => 
   //     const selectedNodes = gridRef.current.api.getSelectedNodes()
