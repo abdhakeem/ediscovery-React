@@ -19,7 +19,7 @@ const Authentication = Loader(lazy(() => import('src/content/authentication/logi
 const Register = Loader(lazy(() => import('src/content/authentication/register')));
 
 // Dashboards
-
+const Document = Loader(lazy(() => import('src/content/dashboards/Document')));
 const Cases = Loader(lazy(() => import('src/content/dashboards/Cases')));
 
 // Applications
@@ -125,6 +125,10 @@ const routes: PartialRouteObject[] = [
             replace
           />
         )
+      },
+      {
+        path: 'documents/:docid',
+        element: <Document />
       },
       {
         path: 'cases',
