@@ -132,7 +132,6 @@ const routes: PartialRouteObject[] = [
         path: 'cases',
         element: <Cases />
       },
-      ,
       {
         path: 'documents/:caseid',
         element: <Documents />
