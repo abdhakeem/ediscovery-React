@@ -17,12 +17,14 @@ import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 
 
 import 'src/style.css';
+import { CellClickedEvent } from 'ag-grid-community';
+import id from 'date-fns/esm/locale/id/index.js';
 
 function DashboardLogin() {
 
   const [rowData, setRowData] = useState([]);
   const gridRef = useRef(null);
-
+  //const props = [];
   const defaultColDef = {
     // set filtering on for all columns
     filter: true,
@@ -45,9 +47,13 @@ function DashboardLogin() {
           fetch('https://ediscovery.inabia.ai/api/getcases?userId=1&type=Cases&caseId=5&fileId=215')
            .then(result => result.json())
            .then(rowData => setRowData(rowData))
+         
    }, []);
 
-  //     const onButtonClick = e => {
+   //console.log(rowData[0]['caseId']);
+   const onCellClicked = (params: CellClickedEvent ) => alert(params.value);
+
+  //     const onButtonClick = e => 
   //     const selectedNodes = gridRef.current.api.getSelectedNodes()
   //     const selectedData = selectedNodes.map( node => node.data )
   //     const selectedDataStringPresentation = selectedData.map( node => `${node.make} ${node.model}`).join(', ')
@@ -135,7 +141,7 @@ function DashboardLogin() {
                 enableFillHandle={enableFillHandle}
                 groupDisplayType={groupDisplayType}
                 sideBar={sideBar}
-                
+                onCellClicked={onCellClicked}
                 
                 // rowDragManaged={true}  //Doesn't work with pagination
         
