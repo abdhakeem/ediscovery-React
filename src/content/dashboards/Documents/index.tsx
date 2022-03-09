@@ -23,8 +23,7 @@ import { useNavigate, useParams } from 'react-router';
 
 function DashboardLogin() {
 
-  const {docid} = useParams();
-  console.log(docid);
+  const {caseid} = useParams();
   const userId = localStorage.getItem('userId');
   const [rowData, setRowData] = useState([]);
   const gridRef = useRef(null);
@@ -48,7 +47,7 @@ function DashboardLogin() {
 
    useEffect(() => {
           //fetch('https://www.ag-grid.com/example-assets/row-data.json')
-          fetch('https://ediscovery.inabia.ai/api/getcases?userId='+userId+'&type=Docs&caseId='+docid+'&fileId=')
+          fetch('https://ediscovery.inabia.ai/api/getcases?userId='+userId+'&type=Docs&caseId='+caseid+'&fileId=')
            .then(result => result.json())
            .then(rowData => setRowData(rowData))
          
@@ -60,7 +59,7 @@ function DashboardLogin() {
   let navigate = useNavigate(); 
 
   const onCellClicked = (params: CellClickedEvent ) => { 
-    let path = '/dashboards/files/'+ docid +'/' + params.data.id; 
+    let path = '/dashboards/files/'+ caseid +'/'+ params.data.id; 
     navigate(path);
   };
 
@@ -108,7 +107,7 @@ function DashboardLogin() {
             toolPanel: 'agFiltersToolPanel',
         }
     ],
-    defaultToolPanel: 'columns',
+    defaultToolPanel: '',
 };
 
 

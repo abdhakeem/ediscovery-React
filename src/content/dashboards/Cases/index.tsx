@@ -106,7 +106,7 @@ function DashboardLogin() {
             toolPanel: 'agFiltersToolPanel',
         }
     ],
-    defaultToolPanel: 'columns',
+    defaultToolPanel: '',
 };
 
 

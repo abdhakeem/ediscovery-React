@@ -20,13 +20,13 @@ import 'src/style.css';
 import { CellClickedEvent } from 'ag-grid-community';
 import id from 'date-fns/esm/locale/id/index.js';
 import { useNavigate, useParams } from 'react-router';
+import axios from 'axios';
 
 function DashboardLogin() {
 
+  const {caseid} = useParams();
   const {docid} = useParams();
   console.log(docid);
-  const {fileid} = useParams();
-  console.log(fileid);
   const userId = localStorage.getItem('userId');
   const [rowData, setRowData] = useState([]);
   const gridRef = useRef(null);
@@ -35,7 +35,36 @@ function DashboardLogin() {
     // set filtering on for all columns
     filter: true,
     resizable: true,
+    flex: 1,
+    editable: true,
   };
+
+  const carMappings = {
+    Relevant: 'Relevant',
+    NonRelevant: 'Non Relevant',
+  };
+
+  const extractValues = (mappings) => {
+    return Object.keys(mappings);
+  };
+
+  //const actionR = extractValues(carMappings);
+  
+  //console.log(actionR);
+
+  const lookupValue = (mappings, key) => {
+    return mappings[key];
+  };
+  
+  // const lookupKey = (mappings, name) => {
+  //   const keys = Object.keys(mappings);
+  //   for (let i = 0; i < keys.length; i++) {
+  //     const key = keys[i];
+  //     if (mappings[key] === name) {
+  //       return key;
+  //     }
+  //   }
+  // };
 
    const [columnDefs] = useState([
        //{ field: "make", sortable: true, filter: true, checkboxSelection: true, floatingFilter: true, rowGroup: false, rowDrag: false, width: 300 },
@@ -46,14 +75,30 @@ function DashboardLogin() {
         return params.value ? params.value : '';
     } },
        { headerName: 'ACTIONS', field: "action", sortable: true, filter: true, floatingFilter: true },
-
+       {
+        headerName: 'ACTIONS',
+        field: 'action',
+        cellEditor: 'agSelectCellEditor',
+        cellEditorParams: {
+          values: extractValues(carMappings),
+        },
+        refData: carMappings,
+        filterParams: {
+          valueFormatter: function (params) {
+            return lookupValue(carMappings, params.value);
+          },
+        },
+        valueFormatter: function (params) {
+          return lookupValue(carMappings, params.value);
+        },
+      },
    ]);   
    
     const enableFillHandle = true;
 
    useEffect(() => {
           //fetch('https://www.ag-grid.com/example-assets/row-data.json')
-          fetch('https://ediscovery.inabia.ai/api/getcases?userId='+userId+'&type=Files&caseId='+docid+'&fileId='+fileid)
+          fetch('https://ediscovery.inabia.ai/api/getcases?userId='+userId+'&type=Files&caseId='+caseid+'&fileId='+docid)
            .then(result => result.json())
            .then(rowData => setRowData(rowData))
          
@@ -68,19 +113,41 @@ function DashboardLogin() {
     let path = '/dashboards/documents/'+ params.data.id; 
     navigate(path);
   };
+  
+  // we will use async/await to fetch this data
+  async function getData(action: string, fileId: any) {
 
-  // const routeChange = () =>{ 
-  //   let path = '/dashboards/documents/57'; 
-  //   navigate(path);
-  // }
-  //  const onCellClicked = (params: CellClickedEvent ) => alert(rowData[0]['caseId']);
+      let payload: string;
 
-  //     const onButtonClick = e => 
-  //     const selectedNodes = gridRef.current.api.getSelectedNodes()
-  //     const selectedData = selectedNodes.map( node => node.data )
-  //     const selectedDataStringPresentation = selectedData.map( node => `${node.make} ${node.model}`).join(', ')
-  //     alert(`Selected nodes: ${selectedDataStringPresentation}`)
-  // }
+      axios.get('https://ediscovery.inabia.ai/api/settags?userId='+userId+'&caseId='+caseid+'&docId='+docid+'&token=ljwboidwndwpnd&action='+action+'&fileId='+fileId)
+      .then(res => {
+      let tagstatus = res.data.Response.Data;
+        console.log(res)
+      if(tagstatus === 'Success') {
+        alert('Action change to: '+action);
+      }
+
+
+      else if (tagstatus !== 'Success') {
+        alert('Failed');
+
+      }
+
+      else {
+        alert('Failed');
+
+      }
+
+    
+      })
+  }
+
+  const onCellValueChanged = useCallback((params) => {
+    // notice that the data always contains the keys rather than values after editing
+    console.log('onCellValueChanged: ', params);
+    //API Call
+    getData(params.value, params.data.id);
+  }, []);
   
   const autoGroupColumnDef = useMemo(()=> ({
         filter: true,
@@ -113,7 +180,7 @@ function DashboardLogin() {
             toolPanel: 'agFiltersToolPanel',
         }
     ],
-    defaultToolPanel: 'columns',
+    defaultToolPanel: '',
 };
 
 
@@ -158,8 +225,8 @@ function DashboardLogin() {
                 enableFillHandle={enableFillHandle}
                 groupDisplayType={groupDisplayType}
                 sideBar={sideBar}
-                onCellClicked={onCellClicked}
-                
+                //onCellClicked={onCellClicked}
+                onCellValueChanged={onCellValueChanged}
                 // rowDragManaged={true}  //Doesn't work with pagination
         
                 >
@@ -175,3 +242,4 @@ function DashboardLogin() {
 }
 
 export default DashboardLogin;
+
