@@ -240,7 +240,7 @@ function SimpleDialog(props) {
 
   return (
     <Dialog onClose={handleClose} open={open}>
-      <DialogTitle className='page-title'><b>Create Case </b></DialogTitle>
+      <DialogTitle className='page-title'><b>Add Document </b></DialogTitle>
       <Grid item xs={12}>
             <Card>
               <Divider />
@@ -267,7 +267,7 @@ function SimpleDialog(props) {
                   </div>
                   <Button  size="medium"  variant="text"  className='theme-btn submit' onClick={handleLogin}
                     // startIcon={<AddTwoToneIcon fontSize="small" />}
-                  > Create
+                  > Upload
                   </Button>
                   
                 </form>
@@ -328,7 +328,7 @@ function Modals() {
       justifyContent="space-between"
       sx={{ pb: 3 }}
       >
-        <Typography variant="h3" className='page-title'>Cases</Typography>
+        <Typography variant="h3" className='page-title'>Documents</Typography>
         <Button
           size="medium"
           onClick={handleClickOpen}
@@ -336,7 +336,7 @@ function Modals() {
           className='theme-btn'
           startIcon={<AddTwoToneIcon fontSize="small" />}
         >
-         Create Case
+         Add Document
         </Button>
         
       </Box>

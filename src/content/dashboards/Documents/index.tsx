@@ -118,15 +118,8 @@ function DashboardLogin() {
         <title>Inabia - eDiscovery</title>
       </Helmet>
       <PageTitleWrapper>
-      <div data-v-4fb88474="" className="HeaderContent center-content">      
-        <div className="HeaderContent-container">
-                  <h1 className="HeaderContent-title" >Welcome to Inabia Ebot</h1>
-                  <h3 className="HeaderContent-paragraph">Create new cases and extract results</h3>
-        </div>
-      </div> 
         <PageHeader />
 
-      
       </PageTitleWrapper>
       <Container maxWidth="lg">
         <Grid

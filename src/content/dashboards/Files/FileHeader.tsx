@@ -328,8 +328,8 @@ function Modals() {
       justifyContent="space-between"
       sx={{ pb: 3 }}
       >
-        <Typography variant="h3" className='page-title'>Cases</Typography>
-        <Button
+        <Typography variant="h3" className='page-title'>Files</Typography>
+        {/* <Button
           size="medium"
           onClick={handleClickOpen}
           variant="text"
@@ -337,7 +337,7 @@ function Modals() {
           startIcon={<AddTwoToneIcon fontSize="small" />}
         >
          Create Case
-        </Button>
+        </Button> */}
         
       </Box>
       <Container maxWidth="lg">
