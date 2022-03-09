@@ -21,6 +21,7 @@ const Register = Loader(lazy(() => import('src/content/authentication/register')
 // Dashboards
 
 const Cases = Loader(lazy(() => import('src/content/dashboards/Cases')));
+const Documents = Loader(lazy(() => import('src/content/dashboards/Documents')));
 
 // Applications
 
@@ -129,6 +130,11 @@ const routes: PartialRouteObject[] = [
       {
         path: 'cases',
         element: <Cases />
+      },
+      ,
+      {
+        path: 'documents/1',
+        element: <Documents />
       },
       {
         path: 'messenger',
