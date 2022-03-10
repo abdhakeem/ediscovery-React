@@ -69,6 +69,10 @@ a {
     color: #1e0040;
 }
 
+input {
+    background: white  !important;
+}
+
 label[data-shrink=false]+.MuiInputBase-formControl .css-pb771q-MuiInputBase-input-MuiOutlinedInput-input {
     background: white  !important;
 }
@@ -150,4 +154,56 @@ label[data-shrink=false]+.MuiInputBase-formControl .css-pb771q-MuiInputBase-inpu
 
 .ag-theme-alpine .ag-icon-last::before {
     color: #000 !important;
+}
+
+
+.ag-theme-alpine .ag-icon-small-down::before {
+    color: black !important;
+}
+
+
+.bg-green {
+	display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background: #64748b;
+    overflow: hidden;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    padding: calc(0.25rem - 1px) 0.25rem;
+    height: 1.25rem;
+    border: 1px solid transparent;
+    min-width: 1.25rem;
+    font-weight: 600;
+    font-size: .625rem;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+	background: #2fb344 !important;
+	border: 1px solid #2fb344;
+}
+
+.bg-orange {
+	display: inline-block;
+	width: 0.5rem;
+	height: 0.5rem;
+	min-width: 0;
+	min-height: auto;
+	padding: 0;
+	border-radius: 100rem;
+	background: #f76707 !important;
+	border: 1px solid #f76707;	
+}
+
+.bg-danger {
+	display: inline-block;
+	width: 0.5rem;
+	height: 0.5rem;
+	min-width: 0;
+	min-height: auto;
+	padding: 0;
+	border-radius: 100rem;
+	background: #d63939 !important;
+	border: 1px solid #d63939;	
 }

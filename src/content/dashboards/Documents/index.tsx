@@ -34,12 +34,38 @@ function DashboardLogin() {
     resizable: true,
   };
 
+
+
+  const customActions = function () {
+    return '<span><a routerLink="/apps/your-path"><i class="users-edit-icon feather icon-edit-1 mr-50"></i></a><i class="users-delete-icon feather icon-trash-2"></i></span>';
+  };
+
+  
+
   const [columnDefs] = useState([
     //{ field: "make", sortable: true, filter: true, checkboxSelection: true, floatingFilter: true, rowGroup: false, rowDrag: false, width: 300 },
     { headerName: 'S. NO', field: "id", sortable: true, filter: true, checkboxSelection: true, floatingFilter: true, rowGroup: false, rowDrag: false, headerCheckboxSelection: true, width: 150 },
     { headerName: 'DOCUMENT NAME', field: "collectionname", sortable: true, filter: true, floatingFilter: true, width: 400},
     { headerName: 'UPLOADED ON', field: "created_at", sortable: true, filter: true, floatingFilter: true, width: 400},
-    { headerName: 'STATUS', field: "status", sortable: true, filter: true, floatingFilter: true, width: 250 },
+    { headerName: 'STATUS', field: "status", sortable: true, filter: true, floatingFilter: true, width: 250,
+    // cellRenderer: function(params) {
+        
+    //   const status = params.data.status;
+    //   var final:any = '';
+
+    //   if(status === 'Completed') {
+    //     final = <span className="badge bg-green me-1"></span>;
+    //   }
+
+    //   else if(status === 'Processing') {
+    //     final = <span className="badge bg-orange me-1">Processing</span>;
+    //   }
+
+    //   else if(status === 'Error') {
+    //     final = <span className="badge bg-red me-1">Error</span>;
+    //   }
+    // }
+  },
 
 ]);   
    

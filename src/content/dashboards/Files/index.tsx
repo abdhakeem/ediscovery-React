@@ -72,9 +72,11 @@ function DashboardLogin() {
        { headerName: 'FILE NAME', field: "orgfilename", sortable: true, filter: true, floatingFilter: true},
        { headerName: 'UPLOADED ON', field: "created_at", sortable: true, filter: true, floatingFilter: true},
        { headerName: 'STATUS', field: "status", sortable: true, filter: true, floatingFilter: true, cellRenderer: function(params) {
-        return params.value ? params.value : '';
-    } },
-       { headerName: 'ACTIONS', field: "action", sortable: true, filter: true, floatingFilter: true },
+        
+        const status = params.data.status;
+        return ('<b>' + status + '</b>')
+      }},
+       //{ headerName: 'ACTIONS', field: "action", sortable: true, filter: true, floatingFilter: true },
        {
         headerName: 'ACTIONS',
         field: 'action',

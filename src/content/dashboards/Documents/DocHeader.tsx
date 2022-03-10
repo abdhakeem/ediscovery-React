@@ -248,6 +248,7 @@ function SimpleDialog(props) {
               <form  noValidate autoComplete="off">
 
                   <div>
+                    
                   <TextField error={state.isError} id="casename"  label="Case Name"  type="text"  placeholder='Enter Case Name'
                     InputLabelProps={{  shrink: true,  }}  onChange={handlecasenameChange}  onKeyPress={handleKeyPress} 
                     className="form-control" />
