@@ -110,6 +110,19 @@ function DashboardLogin() {
 };
 
 
+const onSelectionChanged=(event)=>{
+  const valuer = event.api.getSelectedRows();
+  var i:any = '';
+  var caseIds = '';
+
+  for (i = 0; i < valuer.length; i++) {
+    caseIds += valuer[i].id + ',';
+  }
+  console.log(caseIds);
+  localStorage.setItem('caseIds' , caseIds);
+}
+
+
   return (
     <>
       <Helmet>
@@ -157,6 +170,7 @@ function DashboardLogin() {
                 groupDisplayType={groupDisplayType}
                 sideBar={sideBar}
                 onCellClicked={onCellClicked}
+                onSelectionChanged = {onSelectionChanged}
                 
                 // rowDragManaged={true}  //Doesn't work with pagination
         

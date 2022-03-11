@@ -10,6 +10,7 @@ import HeaderMenu from './Menu';
 import HeaderButtons from './Buttons';
 import HeaderUserbox from './Userbox';
 import Logo from 'src/components/Logo';
+import 'src/style.css';
 
 const HeaderWrapper = styled(Box)(
   ({ theme }) => `

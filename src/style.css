@@ -78,14 +78,14 @@ label[data-shrink=false]+.MuiInputBase-formControl .css-pb771q-MuiInputBase-inpu
 }
 
 .theme-btn {
-    background: #1e0040;
-    color: #fff;
+    background: #1e0040 !important;
+    color: #fff  !important;
     text-shadow: none;
     font-weight: 500;
 }
 
 .page-title {
-    color: #000;
+    color: #000 !important;
 }
 
 .form-control {

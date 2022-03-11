@@ -1,12 +1,56 @@
-import { forwardRef, Ref, useState, ReactElement, ChangeEvent } from 'react';
+import React, { forwardRef, Ref, useState, useReducer, useEffect, ReactElement, ChangeEvent } from 'react';
 import {  Avatar,  Link,  Box,  Button,  Divider,  IconButton,  InputAdornment,  lighten,  List,  ListItem,  ListItemAvatar,  TextField,  Theme,  Tooltip,  Typography,  Dialog,  DialogContent,  DialogTitle,  Slide,  Hidden} from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { TransitionProps } from '@mui/material/transitions';
 import SearchTwoToneIcon from '@mui/icons-material/SearchTwoTone';
-import FindInPageTwoToneIcon from '@mui/icons-material/FindInPageTwoTone';
-import AddTwoToneIcon from '@mui/icons-material/AddTwoTone'; 
+import { useNavigate, useParams } from 'react-router';
+import 'src/style.css';
+import 'src/http-common.ts';
+import axios from 'axios'
 
-import ChevronRightTwoToneIcon from '@mui/icons-material/ChevronRightTwoTone';
+
+type State = {
+  keyword: string
+  helperText: string
+  isError: boolean
+};
+
+const initialState:State = {
+  keyword: '',
+  helperText: '',
+  isError: false
+};
+
+type Action = { type: 'setkeyword' | 'loginSuccess' | 'loginFailed', payload: string }
+| { type: 'setIsError', payload: boolean };
+
+const reducer = (state: State, action: Action): State => {
+  switch (action.type) {
+    case 'setkeyword': 
+      return {
+        ...state,
+        keyword: action.payload
+      };
+
+    case 'loginSuccess': 
+      return {
+        ...state,
+        helperText: action.payload,
+        isError: false
+      };
+    case 'loginFailed': 
+      return {
+        ...state,
+        helperText: action.payload,
+        isError: true
+      };
+    case 'setIsError': 
+      return {
+        ...state,
+        isError: action.payload
+      };
+  }
+}
 
 const Transition = forwardRef(function Transition(
   props: TransitionProps & { children?: ReactElement<any, any> },
@@ -46,6 +90,85 @@ const DialogTitleWrapper = styled(DialogTitle)(
 
 function HeaderSearch() {
 
+  const caseids = localStorage.getItem('caseIds');
+  const {caseid} = useParams();
+  const {docid} = useParams();
+  const {fileid} = useParams();
+  // caseids = localStorage.getItem('caseids');
+
+  alert(caseids + ' == ' + caseid + ' == ' + docid + ' == ' + fileid);
+
+  let navigate = useNavigate();
+
+  const [pending, setPending] = useState(false);
+  function handleClick() {
+    setPending(true);
+  }
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+
+  const handleLogin = () => {
+    
+      const keyword = state.keyword;
+      alert(keyword);
+      
+      if(keyword !== '' && caseid !=='') {
+
+        navigate('/dashboards/search/'+caseid);
+
+      }
+      
+
+      else if(keyword !== '' && caseid !=='' && docid !== '') {
+
+        navigate('/dashboards/search/'+caseid+'/'+docid);
+
+      }
+
+      else if(keyword !== '' && caseid !=='' && docid !== '' && fileid !== '') {
+
+        navigate('/dashboards/search/'+caseid+'/'+docid+'/'+fileid);
+
+      }
+
+      else if(keyword !== '' && caseids !=='' ) {
+
+        navigate('/dashboards/search/');
+
+      }
+
+    
+      // else if (loginstatus === 'Success') {
+      //   dispatch({
+      //     type: 'loginSuccess',
+      //     payload: 'Login Successfully',
+      //   });
+
+      //     navigate('/dashboards/cases');
+
+      // }
+
+      else {
+        dispatch({
+          type: 'loginFailed',
+          payload: 'Unable to proceed your request',
+        });
+
+      }
+
+        
+      };
+
+
+  const handlekeywordChange: React.ChangeEventHandler<HTMLInputElement> =
+    (event) => {
+      dispatch({
+        type: 'setkeyword',
+        payload: event.target.value
+        
+      });
+    };
+
 
   const [openSearchResults, setOpenSearchResults] = useState(false);
   const [searchValue, setSearchValue] = useState('');
@@ -60,6 +183,13 @@ function HeaderSearch() {
     } else {
       setOpenSearchResults(false);
     }
+
+    dispatch({
+        type: 'setkeyword',
+        payload: event.target.value
+        
+      });
+
   };
 
   const [open, setOpen] = useState(false);
@@ -91,9 +221,14 @@ function HeaderSearch() {
       >
         <DialogTitleWrapper>
           <SearchInputWrapper
+            id='keyword'
+            name='keyword'
+            className='keyword'
             value={searchValue}
             autoFocus={true}
             onChange={handleSearchChange}
+            helperText={state.helperText}
+            error={state.isError}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -131,111 +266,11 @@ function HeaderSearch() {
               </Link>
             </Box>
             <Divider sx={{ my: 1 }} />
-            {/* <List disablePadding>
-              <ListItem button>
-                <Hidden smDown>
-                  <ListItemAvatar>
-                    <Avatar
-                      sx={{
-                        background: (theme: Theme) =>
-                          theme.palette.secondary.main
-                      }}
-                    >
-                      <FindInPageTwoToneIcon />
-                    </Avatar>
-                  </ListItemAvatar>
-                </Hidden>
-                <Box flex="1">
-                  <Box display="flex" justifyContent="space-between">
-                    <Link href="#" underline="hover" sx={{ fontWeight: 'bold' }} variant="body2">
-                      Dashboard for Healthcare Platform
-                    </Link>
-                  </Box>
-                  <Typography
-                    component="span"
-                    variant="body2"
-                    sx={{
-                      color: (theme: Theme) =>
-                        lighten(theme.palette.secondary.main, 0.5)
-                    }}
-                  >
-                    This page contains all the necessary information for managing all hospital staff.
-                  </Typography>
-                </Box>
-                <ChevronRightTwoToneIcon />
-              </ListItem>
-              <Divider sx={{ my: 1 }} component="li" />
-              <ListItem button>
-                <Hidden smDown>
-                  <ListItemAvatar>
-                    <Avatar
-                      sx={{
-                        background: (theme: Theme) =>
-                          theme.palette.secondary.main
-                      }}
-                    >
-                      <FindInPageTwoToneIcon />
-                    </Avatar>
-                  </ListItemAvatar>
-                </Hidden>
-                <Box flex="1">
-                  <Box display="flex" justifyContent="space-between">
-                    <Link href="#" underline="hover" sx={{ fontWeight: 'bold' }} variant="body2">
-                      Example Projects Application
-                    </Link>
-                  </Box>
-                  <Typography
-                    component="span"
-                    variant="body2"
-                    sx={{
-                      color: (theme: Theme) =>
-                        lighten(theme.palette.secondary.main, 0.5)
-                    }}
-                  >
-                    This is yet another search result pointing to a app page.
-                  </Typography>
-                </Box>
-                <ChevronRightTwoToneIcon />
-              </ListItem>
-              <Divider sx={{ my: 1 }} component="li" />
-              <ListItem button>
-                <Hidden smDown>
-                  <ListItemAvatar>
-                    <Avatar
-                      sx={{
-                        background: (theme: Theme) =>
-                          theme.palette.secondary.main
-                      }}
-                    >
-                      <FindInPageTwoToneIcon />
-                    </Avatar>
-                  </ListItemAvatar>
-                </Hidden>
-                <Box flex="1">
-                  <Box display="flex" justifyContent="space-between">
-                    <Link href="#" underline="hover" sx={{ fontWeight: 'bold' }} variant="body2">
-                      Search Results Page
-                    </Link>
-                  </Box>
-                  <Typography
-                    component="span"
-                    variant="body2"
-                    sx={{
-                      color: (theme: Theme) =>
-                        lighten(theme.palette.secondary.main, 0.5)
-                    }}
-                  >
-                    Choose if you would like to show or not this typography section here...
-                  </Typography>
-                </Box>
-                <ChevronRightTwoToneIcon />
-              </ListItem>
-            </List> */}
-            {/* <Divider sx={{ mt: 1, mb: 2 }} /> */}
+            
             <Box sx={{ textAlign: 'center' }}>
             <Button
               size="medium"
-              onClick={handleClickOpen}
+              onClick={handleLogin}
               variant="text"
               className='theme-btn'
             >
