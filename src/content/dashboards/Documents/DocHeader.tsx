@@ -248,22 +248,10 @@ function SimpleDialog(props) {
               <form  noValidate autoComplete="off">
 
                   <div>
-                    
-                  <TextField error={state.isError} id="casename"  label="Case Name"  type="text"  placeholder='Enter Case Name'
-                    InputLabelProps={{  shrink: true,  }}  onChange={handlecasenameChange}  onKeyPress={handleKeyPress} 
-                    className="form-control" />
-                  
-                  <TextField error={state.isError} id="caseid"  label="Case ID"  type="text"  placeholder='Enter Case ID'
-                      InputLabelProps={{  shrink: true,  }} onChange={handlecaseidChange}  onKeyPress={handleKeyPress}
-                      className="form-control" />
-                  
-                  <TextField error={state.isError} id="company"  label="Company"  type="text"  placeholder='Enter Company'
-                    InputLabelProps={{ shrink: true,  }} onChange={handlecompanyChange}  onKeyPress={handleKeyPress}
-                      className="form-control" />
 
-                    <TextField error={state.isError} id="description"  label="Description"  type="text"  placeholder='Enter Description'
-                      InputLabelProps={{   shrink: true,  }} onChange={handledescriptionChange}  onKeyPress={handleKeyPress}
-                      className="form-control" helperText={state.helperText} />
+                    <TextField error={state.isError} id="uploadfile"   type="file"  
+                      InputLabelProps={{   shrink: false,  }} onChange={handledescriptionChange}  onKeyPress={handleKeyPress}
+                      className="form-control full-wdth-field" helperText={state.helperText} />
 
                   </div>
                   <Button  size="medium"  variant="text"  className='theme-btn submit' onClick={handleLogin}

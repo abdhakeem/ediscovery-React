@@ -104,6 +104,15 @@ function LoginUser() {
       const email = state.email;
       const password = state.password;
   
+      if (email == '' || password == '') {
+        dispatch({
+          type: 'loginFailed',
+          payload: 'Please filled the required fields',
+        });
+
+        return false;
+
+      }
 
     //API Call
     getData();
@@ -122,7 +131,8 @@ function LoginUser() {
         if(loginstatus !== 'Success') {
           dispatch({
             type: 'loginFailed',
-            payload: loginstatus,
+            // payload: loginstatus,
+            payload: 'Invalid email or password',
           });
 
         }
@@ -209,7 +219,10 @@ function LoginUser() {
                 <br></br>
 
                 <TextField
-                      error={state.isError}  fullWidth  id="password"  type="password"  label="Password"  placeholder="Password"  margin="normal"  helperText={state.helperText}  onChange={handlePasswordChange}  onKeyPress={handleKeyPress}  autoComplete="current-password"  sx={{ mb: 2, width:'60%' }}
+                      error={state.isError}  fullWidth  id="password"  type="password"  label="Password" 
+                      placeholder="Password"  margin="normal"  helperText={state.helperText} 
+                      onChange={handlePasswordChange}  onKeyPress={handleKeyPress}  autoComplete="current-password" 
+                      sx={{ mb: 2, width:'60%' }}
                     />
 
                 </Typography>

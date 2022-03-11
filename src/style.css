@@ -95,9 +95,9 @@ label[data-shrink=false]+.MuiInputBase-formControl .css-pb771q-MuiInputBase-inpu
 }
 
 .submit {
-    margin: 0 auto;
+    margin: 0 auto !important;
     margin-top: 20px !important;
-    display: block;
+    display: block !important;
 }
 
 .ag-theme-alpine [class^=ag-]:before {
@@ -251,4 +251,8 @@ label[data-shrink=false]+.MuiInputBase-formControl .css-pb771q-MuiInputBase-inpu
 .pagesContainer {
     font-size: 20px;
     margin-top: 9px;
+}
+
+.full-wdth-field {
+    width: 100% !important;
 }
