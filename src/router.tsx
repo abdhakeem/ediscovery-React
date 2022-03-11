@@ -23,6 +23,7 @@ const Register = Loader(lazy(() => import('src/content/authentication/register')
 const Cases = Loader(lazy(() => import('src/content/dashboards/Cases')));
 const Documents = Loader(lazy(() => import('src/content/dashboards/Documents')));
 const Files = Loader(lazy(() => import('src/content/dashboards/Files')));
+const Search = Loader(lazy(() => import('src/content/dashboards/Search')));
 
 // Applications
 
@@ -139,6 +140,18 @@ const routes: PartialRouteObject[] = [
       {
         path: 'files/:caseid/:docid',
         element: <Files />
+      },
+      {
+        path: 'search/:caseid',
+        element: <Search />
+      },
+      {
+        path: 'search/:caseid/:docid',
+        element: <Search />
+      },
+      {
+        path: 'search/:caseid/:docid/fileid',
+        element: <Search />
       },
       {
         path: 'messenger',

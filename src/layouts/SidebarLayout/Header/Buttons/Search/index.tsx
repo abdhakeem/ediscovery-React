@@ -1,30 +1,10 @@
 import { forwardRef, Ref, useState, ReactElement, ChangeEvent } from 'react';
-import {
-  Avatar,
-  Link,
-  Box,
-  Button,
-  Divider,
-  IconButton,
-  InputAdornment,
-  lighten,
-  List,
-  ListItem,
-  ListItemAvatar,
-  TextField,
-  Theme,
-  Tooltip,
-  Typography,
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  Slide,
-  Hidden
-} from '@mui/material';
+import {  Avatar,  Link,  Box,  Button,  Divider,  IconButton,  InputAdornment,  lighten,  List,  ListItem,  ListItemAvatar,  TextField,  Theme,  Tooltip,  Typography,  Dialog,  DialogContent,  DialogTitle,  Slide,  Hidden} from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { TransitionProps } from '@mui/material/transitions';
 import SearchTwoToneIcon from '@mui/icons-material/SearchTwoTone';
 import FindInPageTwoToneIcon from '@mui/icons-material/FindInPageTwoTone';
+import AddTwoToneIcon from '@mui/icons-material/AddTwoTone'; 
 
 import ChevronRightTwoToneIcon from '@mui/icons-material/ChevronRightTwoTone';
 
@@ -121,10 +101,11 @@ function HeaderSearch() {
                 </InputAdornment>
               )
             }}
-            placeholder="Search terms here..."
+            placeholder="Search your keyword here..."
             fullWidth
             label="Search"
           />
+
         </DialogTitleWrapper>
         <Divider />
 
@@ -135,7 +116,7 @@ function HeaderSearch() {
               display="flex"
               justifyContent="space-between"
             >
-              <Typography variant="body2" component="span">
+              {/* <Typography variant="body2" component="span">
                 Search results for{' '}
                 <Typography
                   sx={{ fontWeight: 'bold' }}
@@ -144,13 +125,13 @@ function HeaderSearch() {
                 >
                   {searchValue}
                 </Typography>
-              </Typography>
+              </Typography> */}
               <Link href="#" variant="body2" underline="hover">
-                Advanced search
+                Advanced filters
               </Link>
             </Box>
             <Divider sx={{ my: 1 }} />
-            <List disablePadding>
+            {/* <List disablePadding>
               <ListItem button>
                 <Hidden smDown>
                   <ListItemAvatar>
@@ -249,10 +230,17 @@ function HeaderSearch() {
                 </Box>
                 <ChevronRightTwoToneIcon />
               </ListItem>
-            </List>
-            <Divider sx={{ mt: 1, mb: 2 }} />
+            </List> */}
+            {/* <Divider sx={{ mt: 1, mb: 2 }} /> */}
             <Box sx={{ textAlign: 'center' }}>
-              <Button color="primary">View all search results</Button>
+            <Button
+              size="medium"
+              onClick={handleClickOpen}
+              variant="text"
+              className='theme-btn'
+            >
+            Search
+            </Button>
             </Box>
           </DialogContent>
         )}
