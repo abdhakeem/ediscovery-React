@@ -24,8 +24,12 @@ import axios from 'axios';
 
 function DashboardLogin() {
 
+  localStorage.removeItem('caseIds');
+  localStorage.removeItem('pcaseId');
   const {caseid} = useParams();
   const {docid} = useParams();
+  localStorage.setItem('pcaseId', caseid);
+  localStorage.setItem('pdocid', docid);
   console.log(docid);
   const userId = localStorage.getItem('userId');
   const [rowData, setRowData] = useState([]);
@@ -68,18 +72,17 @@ function DashboardLogin() {
 
    const [columnDefs] = useState([
        //{ field: "make", sortable: true, filter: true, checkboxSelection: true, floatingFilter: true, rowGroup: false, rowDrag: false, width: 300 },
-       { headerName: 'FILE ID', field: "id", sortable: true, filter: true, checkboxSelection: true, floatingFilter: true, rowGroup: false, rowDrag: false, headerCheckboxSelection: true },
+       { headerName: 'FILE ID', field: "id", sortable: true, filter: true, floatingFilter: true, rowGroup: false, rowDrag: false },
        { headerName: 'FILE NAME', field: "orgfilename", sortable: true, filter: true, floatingFilter: true},
        { headerName: 'UPLOADED ON', field: "created_at", sortable: true, filter: true, floatingFilter: true},
-       { headerName: 'STATUS', field: "status", sortable: true, filter: true, floatingFilter: true, cellRenderer: function(params) {
-        
-        const status = params.data.status;
-        return ('<b>' + status + '</b>')
-      }},
+       { headerName: 'STATUS', field: "status", sortable: true, filter: true, floatingFilter: true},
        //{ headerName: 'ACTIONS', field: "action", sortable: true, filter: true, floatingFilter: true },
        {
         headerName: 'ACTIONS',
         field: 'action',
+        sortable: true,
+        filter: true,
+        floatingFilter: true,
         cellEditor: 'agSelectCellEditor',
         cellEditorParams: {
           values: extractValues(carMappings),

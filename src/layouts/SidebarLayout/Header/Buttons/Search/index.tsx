@@ -91,51 +91,52 @@ const DialogTitleWrapper = styled(DialogTitle)(
 function HeaderSearch() {
 
   const caseids = localStorage.getItem('caseIds');
-  const {caseid} = useParams();
-  const {docid} = useParams();
-  const {fileid} = useParams();
+  const caseid = localStorage.getItem('pcaseId');
+  const docid = localStorage.getItem('pdocid');
+  const fileid = localStorage.getItem('pfileid');
   // caseids = localStorage.getItem('caseids');
 
-  alert(caseids + ' == ' + caseid + ' == ' + docid + ' == ' + fileid);
+  console.log(caseids + ' == ' + caseid + ' == ' + docid + ' == ' + fileid);
 
   let navigate = useNavigate();
 
   const [pending, setPending] = useState(false);
-  function handleClick() {
-    setPending(true);
-  }
+  
   const [state, dispatch] = useReducer(reducer, initialState);
 
 
   const handleLogin = () => {
     
       const keyword = state.keyword;
-      alert(keyword);
-      
-      if(keyword !== '' && caseid !=='') {
+      localStorage.setItem('keyword', keyword);
 
-        navigate('/dashboards/search/'+caseid);
+      console.log(keyword + ' == ' + caseids + ' == ' + caseid + ' == ' + docid + ' == ' + fileid);
+      
+      if(keyword != '' && caseids !='' && caseid == null && docid == null && fileid == null) {
+        
+        navigate('/dashboards/search/'+caseids);
 
       }
       
 
-      else if(keyword !== '' && caseid !=='' && docid !== '') {
+      else if(keyword != '' && caseids == null && caseid !='' && docid == null && fileid == null) {
+
+        navigate('/dashboards/search/'+caseid);
+
+      }
+
+      else if(keyword != '' && caseids == null && caseid != '' && docid != '' && fileid == null) {
 
         navigate('/dashboards/search/'+caseid+'/'+docid);
 
       }
 
-      else if(keyword !== '' && caseid !=='' && docid !== '' && fileid !== '') {
+      // else if(keyword != '' && caseids ==null && caseid !='' && docid != '' && fileid != '') {
 
-        navigate('/dashboards/search/'+caseid+'/'+docid+'/'+fileid);
+      //   navigate('/dashboards/search/'+caseid+'/'+docid+'/'+fileid);
 
-      }
+      // }
 
-      else if(keyword !== '' && caseids !=='' ) {
-
-        navigate('/dashboards/search/');
-
-      }
 
     
       // else if (loginstatus === 'Success') {
@@ -148,13 +149,13 @@ function HeaderSearch() {
 
       // }
 
-      else {
-        dispatch({
-          type: 'loginFailed',
-          payload: 'Unable to proceed your request',
-        });
+      // else {
+      //   dispatch({
+      //     type: 'loginFailed',
+      //     payload: 'Unable to proceed your request',
+      //   });
 
-      }
+      // }
 
         
       };

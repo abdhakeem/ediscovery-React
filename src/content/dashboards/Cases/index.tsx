@@ -24,6 +24,9 @@ import { useNavigate } from 'react-router';
 function DashboardLogin() {
 
   const userId = localStorage.getItem('userId');
+  localStorage.removeItem('pdocid');
+  localStorage.removeItem('pcaseId');
+
   const [rowData, setRowData] = useState([]);
   const gridRef = useRef(null);
   //const props = [];

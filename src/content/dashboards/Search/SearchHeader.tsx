@@ -15,7 +15,7 @@ import axios from 'axios';
 
 
 const emails = ['username@gmail.com', 'user02@gmail.com'];
-
+const keyword = localStorage.getItem('keyword');
 
 //state type
 // eslint -- enforce coding stand
@@ -328,7 +328,7 @@ function Modals() {
       justifyContent="space-between"
       sx={{ pb: 3 }}
       >
-        <Typography variant="h3" className='page-title'>Found results of "tra"
+        <Typography variant="h3" className='page-title'>Found results for "{keyword}"
         </Typography>
         {/* <Button
           size="medium"
