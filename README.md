@@ -35,7 +35,7 @@ We’ve included a few page examples for most used user flows that will give you
 ---
 <h3>Updrade to PRO</h3>
 
-<p>If you're looking for more features like translations, complex user flows, redux examples and more,  we recommend taking a look at the premium version (Tokyo White Typescript Dashboard) on <a href="https://bloomui.com">bloomui.com</a></p>
+<p>If you're looking for more features like translations, complex user flows, redux examples and more,  we recommend taking a look at the premium version (Inabia - eDiscovery Dashboard) on <a href="https://ediscovery.inabia.com/">ediscovery.inabia.com</a></p>
 
 ---
 
