@@ -127,8 +127,12 @@ function LoginUser() {
         logintoken = res.data.Response.Token;
         loginid = res.data.Response.userId;
 
+        enum status {
+          success = 'Success',
+        }
+
         
-        if(loginstatus !== 'Success') {
+        if(loginstatus !== status.success) {
           dispatch({
             type: 'loginFailed',
             // payload: loginstatus,
@@ -138,7 +142,7 @@ function LoginUser() {
         }
 
     
-      else if (loginstatus === 'Success') {
+      else if (loginstatus === status.success) {
         dispatch({
           type: 'loginSuccess',
           payload: 'Login Successfully',

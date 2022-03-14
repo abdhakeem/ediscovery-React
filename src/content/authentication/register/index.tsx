@@ -120,8 +120,12 @@ function LoginUser() {
         console.log(res.data.Response);
         registerstatus = res.data.Response.Data;
 
+      enum status {
+        success = 'User created successfully',
+      }  
+
         
-        if(registerstatus !== 'User created successfully') {
+        if(registerstatus !== status.success) {
           dispatch({
             type: 'loginFailed',
             payload: registerstatus,
@@ -129,7 +133,7 @@ function LoginUser() {
         }
 
     
-      else if (registerstatus === 'User created successfully') {
+      else if (registerstatus === status.success) {
         dispatch({
           type: 'loginSuccess',
           payload: 'User created successfully',
