@@ -99,6 +99,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .css-pb771q-MuiInputBase-inpu
     margin-top: 20px !important;
     display: block !important;
     font-weight: 500 !important;
+    background: #f78f1b !important;
 }
 
 .ag-theme-alpine [class^=ag-]:before {
@@ -257,3 +258,38 @@ label[data-shrink=false]+.MuiInputBase-formControl .css-pb771q-MuiInputBase-inpu
 .full-wdth-field {
     width: 100% !important;
 }
+
+.text-danger {
+    text-align: center;
+}
+
+.MuiDropzoneArea-root {
+    padding: 40px 60px;
+    background-color: #f8f8f8 !important;
+    border: 1px dashed #c1c1c1 !important;
+}
+
+.MuiDropzoneArea-icon {
+    color: #f78f1b !important;
+}
+
+.MuiDropzoneArea-text {
+    color: #000 !important;
+    font-size: 20px !important;
+}
+
+.MuiTypography-subtitle1 {
+    display: none !important;
+}
+
+.MuiGrid-spacing-xs-1 {
+    margin-top: 10px !important;
+}
+
+.MuiGrid-spacing-xs-1 {
+    margin: 0 auto !important;
+    display: block !important;
+    margin-top: 10px !important;
+    width: max-content !important;
+}
+

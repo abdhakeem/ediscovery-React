@@ -77,7 +77,7 @@ const reducer = (state: State, action: Action): State => {
 function SimpleDialog(props) {
 
 
-
+  let navigate = useNavigate();
   const useStyles = makeStyles(theme => createStyles({
     previewChip: {
       minWidth: '100%',
@@ -92,6 +92,19 @@ function SimpleDialog(props) {
   const HandlefileChange = (files) => {
 
     const myfile = state.file;
+
+    if (myfile == '') {
+      dispatch({
+        type: 'loginFailed',
+        payload: 'Please upload a file and upload again',
+      });
+
+      return false;
+
+    }
+
+
+
     var status:string = '';
     var data:string = '';
     console.log(myfile);
@@ -115,6 +128,24 @@ function SimpleDialog(props) {
         status = res.data.Response.success;
         data = res.data.Response.Data;
         console.log(status + ' ==> ' + data);
+
+        if (status === 'true') {
+          dispatch({
+            type: 'loginSuccess',
+            payload: data,
+          });
+
+  
+        }
+        
+        else if (status !== 'true') {
+            dispatch({
+              type: 'loginFailed',
+              payload: data,
+            });
+        }
+
+        return false;
       
       });
       
@@ -123,19 +154,25 @@ function SimpleDialog(props) {
       //console.log(response);
 
     } catch(error) {
-      console.log(error)
+
+      console.log('Catch -->' + error);
+
+      dispatch({
+        type: 'loginFailed',
+        payload: 'Unable to upload File',
+      });
     }
 
+    const timer = setTimeout(() => {
+      
+    handleClose();
 
-    //alert(Response);
+    dispatch({
+      type: 'loginSuccess',
+      payload: '',
+    });
 
-    // const file = new File(["foo"], "foo.txt", {
-    //   type: "text/plain",
-    // });
- 
-    // {(files) => console.log('Files:', files)}
-
-    // console.log('Files:', files)}
+    }, 3000);
 
   };
 
@@ -156,8 +193,6 @@ function SimpleDialog(props) {
   var logintoken:any = '';
   var loginid:any = '';
 
-  let navigate = useNavigate();
-
   const [pending, setPending] = useState(false);
   function handleClick() {
     setPending(true);
@@ -175,6 +210,11 @@ function SimpleDialog(props) {
         dispatch({
           type: 'setfile',
           payload: acceptedFiles[0],
+        });
+
+        dispatch({
+          type: 'loginFailed',
+          payload: '',
         });
 
     }
@@ -198,17 +238,18 @@ function SimpleDialog(props) {
                   previewGridProps={{container: { spacing: 1, direction: 'row' }}}
                   previewChipProps={{classes: { root: classes.previewChip } }}
                   dropzoneText={"Click or drag file to this area to upload"}
-                  // previewText="Selected files"
+                  previewText="Selected file"
                   maxFileSize={5000000}
                   filesLimit = {1}
-
+                  showAlerts = {false}
           
                 />
 
                   </div>
+                  <p className="text-danger" >{state.helperText}</p> 
                   <Button  size="medium"  variant="text"  className='theme-btn submit' onClick={HandlefileChange}
                     // startIcon={<AddTwoToneIcon fontSize="small" />}
-                  > Upload
+                  > FINISH UPLOADING
                   </Button>
                   
                 </form>
