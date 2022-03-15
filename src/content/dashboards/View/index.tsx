@@ -1,10 +1,10 @@
 import { Helmet } from 'react-helmet-async';
 import PageHeader from './ViewHeader';
 import PageTitleWrapper from 'src/components/PageTitleWrapper';
-import { Grid, Container } from '@mui/material';
+import { Grid, Container, Typography } from '@mui/material';
 import Footer from 'src/components/Footer';
 
-import { useEffect, useMemo, useState, useRef, useCallback } from 'react';
+import { useEffect, useMemo, useState, useRef, useCallback, SyntheticEvent } from 'react';
 import { render } from 'react-dom';
 
 import { AgGridColumn, AgGridReact } from 'ag-grid-react';
@@ -14,6 +14,12 @@ import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import 'ag-grid-enterprise';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Box from '@mui/material/Box';
+import { Card, CardHeader, CardContent, Divider } from '@mui/material';
+
+
 
 
 import 'src/style.css';
@@ -23,7 +29,51 @@ import { useNavigate, useParams } from 'react-router';
 import axios from 'axios';
 
 
+interface TabPanelProps {
+  children?: React.ReactNode;
+  index: number;
+  value: number;
+}
+
+function TabPanel(props: TabPanelProps) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+function a11yProps(index: number) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
+  };
+}
+
+
 function DashboardLogin() {
+
+  const [value, setValue] = useState(0);
+
+  const handleChange = (event: SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
+
+  const handleChanges = (event: SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
 
   localStorage.removeItem('caseIds');
   localStorage.removeItem('pcaseId');
@@ -209,37 +259,53 @@ function DashboardLogin() {
           alignItems="stretch"
           spacing={3}
         >
-          <Grid item lg={12} xs={12}>
-          <div className="ag-theme-alpine" style={{height: 600, width: '100%'}}>
-          <AgGridReact
-                ref={gridRef}
-                rowData={rowData}
-                columnDefs={columnDefs}
-                rowSelection="multiple"
-                groupSelectsChildren={true}
-                pagination={true}
-                autoGroupColumnDef={autoGroupColumnDef}
-                enableCellTextSelection={true}
-                paginationPageSize={30}
-                cacheBlockSize={30}
-                // paginationAutoPageSize={true}
-                paginateChildRows={true}
-                ensureDomOrder={true}
-                rowMultiSelectWithClick={true}
-                defaultColDef={defaultColDef}
-                enableRangeSelection={true}
-                enableFillHandle={enableFillHandle}
-                groupDisplayType={groupDisplayType}
-                sideBar={sideBar}
-                //onCellClicked={onCellClicked}
-                onCellValueChanged={onCellValueChanged}
-                // rowDragManaged={true}  //Doesn't work with pagination
-        
-                >
-           </AgGridReact>
-        </div>
+          <Grid item lg={3} xs={12}>
+            123
       
-            </Grid>
+          </Grid>
+
+          <Grid item lg={6} xs={12}>
+                <Box sx={{ width: '100%' }}>
+                  <Tabs variant="scrollable"
+                    scrollButtons="auto"
+                    textColor="primary"
+                    indicatorColor="primary" value={value} onChange={handleChange} aria-label="basic tabs example">
+                    <Tab label="Item One" {...a11yProps(0)} />
+                    <Tab label="Item Two" {...a11yProps(1)} />
+                    <Tab label="Item Three" {...a11yProps(2)} />
+                  </Tabs>
+                  <TabPanel value={value} index={0}>
+                    Item One
+                  </TabPanel>
+                  <TabPanel value={value} index={1}>
+                    Item Two
+                  </TabPanel>
+                  <TabPanel value={value} index={2}>
+                    Item Three
+                  </TabPanel>
+                </Box>
+
+          </Grid>
+
+          <Grid item lg={3} xs={12}>
+          <Box sx={{ width: '100%' }}>
+                  <Tabs variant="scrollable"
+                    scrollButtons="auto"
+                    textColor="primary"
+                    indicatorColor="primary" value={value} onChange={handleChanges} aria-label="basic tabs example">
+                    <Tab label="Item three" {...a11yProps(3)} />
+                    <Tab label="Item four" {...a11yProps(4)} />
+                  </Tabs>
+                  <TabPanel value={value} index={3}>
+                    Item three
+                  </TabPanel>
+                  <TabPanel value={value} index={4}>
+                    Item four
+                  </TabPanel>
+                </Box>
+      
+          </Grid>
+
         </Grid>
       </Container>
       <Footer />
