@@ -26,51 +26,29 @@ const emails = ['username@gmail.com', 'user02@gmail.com'];
 //state type
 // eslint -- enforce coding stand
 type State = {
-  casename: string
-  caseid:  string
-  company: string
-  description: string
+  file: any
   isButtonDisabled: boolean
   helperText: string
   isError: boolean
 };
 
 const initialState:State = {
-  casename: '',
-  caseid: '',
-  company: '',
-  description: '',
+  file: '',
   isButtonDisabled: true,
   helperText: '',
   isError: false
 };
 
-type Action = { type: 'setcasename' | 'setcaseid' | 'setcompany' | 'setdescription' | 'loginSuccess' | 'loginFailed', payload: string }
+type Action = { type: 'setfile' | 'loginSuccess' | 'loginFailed', payload: string }
 | { type: 'setIsButtonDisabled' | 'setIsError', payload: boolean };
 
 const reducer = (state: State, action: Action): State => {
   switch (action.type) {
-    case 'setcasename': 
+    case 'setfile': 
       return {
         ...state,
-        casename: action.payload
+        file: action.payload
       };
-    case 'setcaseid': 
-      return {
-        ...state,
-        caseid: action.payload
-      };
-    case 'setdescription': 
-      return {
-        ...state,
-        description: action.payload
-      };
-    case 'setcompany': 
-      return {
-        ...state,
-        company: action.payload
-      };
-    
     case 'setIsButtonDisabled': 
       return {
         ...state,
@@ -98,9 +76,12 @@ const reducer = (state: State, action: Action): State => {
 
 function SimpleDialog(props) {
 
+
+
   const useStyles = makeStyles(theme => createStyles({
     previewChip: {
-      Width: '100%',
+      minWidth: '100%',
+      maxWidth: '100%',
 
     },
   }));
@@ -108,24 +89,38 @@ function SimpleDialog(props) {
   
   const classes = useStyles();
   
-  const handlefileChange = (files) => {
+  const HandlefileChange = (files) => {
+
+    const myfile = state.file;
+    var status:string = '';
+    var data:string = '';
+    console.log(myfile);
 
     const caseId = localStorage.getItem('pcaseId');
     const id = localStorage.getItem('userId');
 
-    console.log('Files:', files)
+    //console.log('Files:', files)
 
     const formData = new FormData();
-    formData.append("file", files);
+    formData.append("file", myfile);
     try {
-      const response:any = axios({
+      const response = axios({
         method: "post",
         url: "https://ediscovery.inabia.ai/api/fileUpload?userId="+ id +"&caseId="+ caseId +" ",
         data: formData,
         headers: { "Content-Type": "multipart/form-data" },
-      });
+      }).then(res => {
+        // console.log(res.data)
 
-      //alert(response);
+        status = res.data.Response.success;
+        data = res.data.Response.Data;
+        console.log(status + ' ==> ' + data);
+      
+      });
+      
+
+
+      //console.log(response);
 
     } catch(error) {
       console.log(error)
@@ -170,56 +165,18 @@ function SimpleDialog(props) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
 
-  
-  useEffect(() => {
-    if (state.casename.trim() && state.caseid.trim() && state.company.trim() && state.description.trim()) {
-     dispatch({
-       type: 'setIsButtonDisabled',
-       payload: false
-     });
-    } else {
-      dispatch({
-        type: 'setIsButtonDisabled',
-        payload: true
-      });
-    }
-  }, [state.casename, state.caseid, state.company, state.description]);
 
+  // const onDrop = (acceptedFiles) => {
+  //   console.log(acceptedFiles[0]);
+  // }
+
+  const onDrop  = (acceptedFiles) => {
  
+        dispatch({
+          type: 'setfile',
+          payload: acceptedFiles[0],
+        });
 
-  
-
-  const handlecasenameChange: React.ChangeEventHandler<HTMLInputElement> =
-    (event) => {
-      dispatch({
-        type: 'setcasename',
-        payload: event.target.value
-        
-      });
-    };
-
-  const handlecaseidChange: React.ChangeEventHandler<HTMLInputElement> =
-    (event) => {
-      dispatch({
-        type: 'setcaseid',
-        payload: event.target.value
-      });
-    };
-  
-  const handlecompanyChange: React.ChangeEventHandler<HTMLInputElement> =
-    (event) => {
-      dispatch({
-        type: 'setcompany',
-        payload: event.target.value
-      });
-    };
-
-  const handledescriptionChange: React.ChangeEventHandler<HTMLInputElement> =
-    (event) => {
-      dispatch({
-        type: 'setdescription',
-        payload: event.target.value
-      });
     }
 
   return (
@@ -234,21 +191,22 @@ function SimpleDialog(props) {
                   <div>
 
                   <DropzoneArea
+                  onDrop={onDrop}
                   showPreviews={true}
                   showPreviewsInDropzone={false}
                   useChipsForPreview
                   previewGridProps={{container: { spacing: 1, direction: 'row' }}}
                   previewChipProps={{classes: { root: classes.previewChip } }}
                   dropzoneText={"Click or drag file to this area to upload"}
-                  previewText="Selected files"
+                  // previewText="Selected files"
                   maxFileSize={5000000}
                   filesLimit = {1}
-                  onChange={handlefileChange}
+
           
                 />
 
                   </div>
-                  <Button  size="medium"  variant="text"  className='theme-btn submit' onClick={handlefileChange}
+                  <Button  size="medium"  variant="text"  className='theme-btn submit' onClick={HandlefileChange}
                     // startIcon={<AddTwoToneIcon fontSize="small" />}
                   > Upload
                   </Button>
