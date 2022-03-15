@@ -97,8 +97,8 @@ function DashboardLogin() {
           return lookupValue(carMappings, params.value);
         },
       },
-   ]);   
-   
+   ]);
+
     const enableFillHandle = true;
 
    useEffect(() => {
@@ -115,7 +115,7 @@ function DashboardLogin() {
   let navigate = useNavigate(); 
 
   const onCellClicked = (params: CellClickedEvent ) => { 
-    let path = '/dashboards/documents/'+ params.data.id; 
+    let path = '/dashboards/view/'+caseid+'/'+docid+'/'+params.data.id+'/'+params.data.orgfilename+'.pdf'; 
     navigate(path);
   };
   
@@ -230,7 +230,7 @@ function DashboardLogin() {
                 enableFillHandle={enableFillHandle}
                 groupDisplayType={groupDisplayType}
                 sideBar={sideBar}
-                //onCellClicked={onCellClicked}
+                onCellClicked={onCellClicked}
                 onCellValueChanged={onCellValueChanged}
                 // rowDragManaged={true}  //Doesn't work with pagination
         

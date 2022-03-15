@@ -155,7 +155,7 @@ const routes: PartialRouteObject[] = [
         element: <Search />
       },
       {
-        path: 'view/:caseid/:docid/:fileid',
+        path: 'view/:caseid/:docid/:fileid/:filename',
         element: <View />
       },
       {
