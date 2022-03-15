@@ -10,6 +10,7 @@ import { useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import ExpandMoreTwoToneIcon from '@mui/icons-material/ExpandMoreTwoTone';
+import Logo from 'src/components/Logo';
 
 const ListWrapper = styled(Box)(
   ({ theme }) => `
@@ -77,6 +78,8 @@ function HeaderMenu() {
 
   return (
     <>
+       <Logo />
+
       {/* <ListWrapper>
         <List disablePadding component={Box} display="flex">
           <ListItem
@@ -87,7 +90,7 @@ function HeaderMenu() {
           >
             <ListItemText
               primaryTypographyProps={{ noWrap: true }}
-              primary="Buttons"
+              primary="Cases"
             />
           </ListItem>
           <ListItem
@@ -98,10 +101,22 @@ function HeaderMenu() {
           >
             <ListItemText
               primaryTypographyProps={{ noWrap: true }}
-              primary="Forms"
+              primary="Settings"
             />
           </ListItem>
           <ListItem
+            classes={{ root: 'MuiListItem-indicators' }}
+            button
+            component={NavLink}
+            to="/components/forms"
+          >
+            <ListItemText
+              primaryTypographyProps={{ noWrap: true }}
+              primary="Logout"
+            />
+          </ListItem>
+          
+          {/* <ListItem
             classes={{ root: 'MuiListItem-indicators' }}
             button
             ref={ref}
@@ -120,8 +135,8 @@ function HeaderMenu() {
             />
           </ListItem>
         </List>
-      </ListWrapper>
-      <Menu anchorEl={ref.current} onClose={handleClose} open={isOpen}>
+      </ListWrapper> */}
+      {/* <Menu anchorEl={ref.current} onClose={handleClose} open={isOpen}>
         <MenuItem sx={{ px: 3 }} component={NavLink} to="/overview">
           Overview
         </MenuItem>

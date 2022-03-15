@@ -135,6 +135,10 @@ const routes: PartialRouteObject[] = [
         element: <Cases />
       },
       {
+        path: 'cases/:token',
+        element: <Cases />
+      },
+      {
         path: 'documents/:caseid',
         element: <Documents />
       },

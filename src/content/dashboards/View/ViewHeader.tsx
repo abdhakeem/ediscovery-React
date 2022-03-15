@@ -8,14 +8,18 @@ import Button from '@mui/material/Button';
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
 import TextField from '@mui/material/TextField';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import 'src/style.css';
 import 'src/http-common.ts';
 import axios from 'axios';
-
+import Paper from '@mui/material/Paper';
+import InputBase from '@mui/material/InputBase';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import SearchIcon from '@mui/icons-material/Search';
+import DirectionsIcon from '@mui/icons-material/Directions';
 
 const emails = ['username@gmail.com', 'user02@gmail.com'];
-
 
 //state type
 // eslint -- enforce coding stand
@@ -307,6 +311,11 @@ SimpleDialog.propTypes = {
 
 function Modals() {
 
+  const {caseid} = useParams();
+  const {docid} = useParams();
+  const {fileid} = useParams();
+  const {filename} = useParams();
+
   const [open, setOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState(emails[1]);
 
@@ -328,16 +337,22 @@ function Modals() {
       justifyContent="space-between"
       sx={{ pb: 3 }}
       >
-        <Typography variant="h3" className='page-title'>View</Typography>
-        {/* <Button
-          size="medium"
-          onClick={handleClickOpen}
-          variant="text"
-          className='theme-btn'
-          startIcon={<AddTwoToneIcon fontSize="small" />}
+        <Typography variant="h3" className='page-title' sx={{ ml: 1, flex: 0.5}} noWrap title={filename} >{filename}</Typography>
+        <Paper
+          component="form"
+          sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400, flex: 0.45 }}
         >
-         Create Case
-        </Button> */}
+          <InputBase
+            sx={{ ml: 1, flex: 1 }}
+            placeholder="Search keyword here"
+            inputProps={{ 'aria-label': 'Search keyword here' }}
+          />
+          <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
+            <SearchIcon />
+          </IconButton>
+          <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
+
+        </Paper>
         
       </Box>
       <Container maxWidth="lg">

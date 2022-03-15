@@ -16,12 +16,17 @@ import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 
 
+
 import 'src/style.css';
 import { CellClickedEvent } from 'ag-grid-community';
 import id from 'date-fns/esm/locale/id/index.js';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 
 function DashboardLogin() {
+
+  // const queryString = (location.hash);
+
+  // console.log('Token ==> '+queryString);
 
   const userId = localStorage.getItem('userId');
   localStorage.removeItem('pdocid');

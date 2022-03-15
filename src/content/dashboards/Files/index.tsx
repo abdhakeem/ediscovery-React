@@ -115,7 +115,7 @@ function DashboardLogin() {
   let navigate = useNavigate(); 
 
   const onCellClicked = (params: CellClickedEvent ) => { 
-    let path = '/dashboards/view/'+caseid+'/'+docid+'/'+params.data.id+'/'+params.data.orgfilename+'.pdf'; 
+    let path = '/dashboards/view/'+caseid+'/'+docid+'/'+params.data.id+'/'+params.data.orgfilename; 
     navigate(path);
   };
   

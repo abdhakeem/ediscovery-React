@@ -53,9 +53,10 @@
 } */
 
 .ag-header-row-column {
-    background: #26034e !important;
+    background: #303030 !important;
     width: 100% !important;
     color: #fff !important;
+    font-weight: 500 !important;
 }
 
 img {
@@ -78,7 +79,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .css-pb771q-MuiInputBase-inpu
 }
 
 .theme-btn {
-    background: #1e0040 !important;
+    background: #f78f1b !important;
     color: #fff  !important;
     text-shadow: none;
     font-weight: 500;
@@ -278,9 +279,9 @@ label[data-shrink=false]+.MuiInputBase-formControl .css-pb771q-MuiInputBase-inpu
     font-size: 20px !important;
 }
 
-.MuiTypography-subtitle1 {
+/* .MuiTypography-subtitle1 {
     display: none !important;
-}
+} */
 
 .MuiGrid-spacing-xs-1 {
     margin-top: 10px !important;
@@ -292,4 +293,3 @@ label[data-shrink=false]+.MuiInputBase-formControl .css-pb771q-MuiInputBase-inpu
     margin-top: 10px !important;
     width: max-content !important;
 }
-
