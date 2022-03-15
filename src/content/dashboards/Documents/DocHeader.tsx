@@ -12,6 +12,12 @@ import { useNavigate } from 'react-router';
 import 'src/style.css';
 import 'src/http-common.ts';
 import axios from 'axios';
+import {useCallback} from 'react'
+import {useDropzone} from 'react-dropzone'
+import Dropzone from 'react-dropzone'
+import { DropzoneArea } from 'material-ui-dropzone';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { AttachFile } from '@mui/icons-material';
 
 
 const emails = ['username@gmail.com', 'user02@gmail.com'];
@@ -91,6 +97,55 @@ const reducer = (state: State, action: Action): State => {
 }
 
 function SimpleDialog(props) {
+
+  const useStyles = makeStyles(theme => createStyles({
+    previewChip: {
+      Width: '100%',
+
+    },
+  }));
+  
+  
+  const classes = useStyles();
+  
+  const handlefileChange = (files) => {
+
+    const caseId = localStorage.getItem('pcaseId');
+    const id = localStorage.getItem('userId');
+
+    console.log('Files:', files)
+
+    const formData = new FormData();
+    formData.append("file", files);
+    try {
+      const response:any = axios({
+        method: "post",
+        url: "https://ediscovery.inabia.ai/api/fileUpload?userId="+ id +"&caseId="+ caseId +" ",
+        data: formData,
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      //alert(response);
+
+    } catch(error) {
+      console.log(error)
+    }
+
+
+    //alert(Response);
+
+    // const file = new File(["foo"], "foo.txt", {
+    //   type: "text/plain",
+    // });
+ 
+    // {(files) => console.log('Files:', files)}
+
+    // console.log('Files:', files)}
+
+  };
+
+
+
   const { onClose, selectedValue, open } = props;
 
   const handleClose = () => {
@@ -130,80 +185,9 @@ function SimpleDialog(props) {
     }
   }, [state.casename, state.caseid, state.company, state.description]);
 
-  const handleLogin = () => {
-    
-      const casename = state.casename;
-      const caseid = state.caseid;
-      const company = state.company;
-      const description = state.description;
-      const id = localStorage.getItem('userId');
-      const token = localStorage.getItem('token');
+ 
 
-      console.log(id + '==>' + token + '==>' + casename + '==>' + caseid + '==>' + company + '==>' + description);
-
-      if(casename === '' || caseid === '' || company === '' || description === '') {
-        dispatch({
-          type: 'loginFailed',
-          payload: 'Fill out the required fields',
-        });
-
-      }
-
-    //API Call
-    getData();
   
-      // we will use async/await to fetch this data
-      async function getData() {
-
-        axios.post('https://ediscovery.inabia.ai/api/addcase?projectname='+ casename +'&caseId='+ caseid +'&company='+ company +'&description='+ description +'&token='+ token +'&userId='+ id +'')
-      .then(res => {
-        console.log(res.data);
-
-        loginstatus = res.data.Response.Data;
-        logintoken = res.data.Response.Token;
-        loginid = res.data.Response.userId;
-
-        
-        if(loginstatus !== 'Case created successfully') {
-          dispatch({
-            type: 'loginFailed',
-            payload: loginstatus,
-          });
-
-        }
-
-    
-      else if (loginstatus === 'Case created successfully') {
-        dispatch({
-          type: 'loginSuccess',
-          payload: 'Case created successfully',
-        });
-
-        // localStorage.setItem('email' , state.email);
-          //navigate('/dashboards/cases');
-
-      }
-
-      else {
-        dispatch({
-          type: 'loginFailed',
-          payload: 'Unable to proceed your request',
-        });
-
-      }
-
-        
-      })
-      }
-
-
-  };
-
-  const handleKeyPress = (event: React.KeyboardEvent) => {
-    if (event.keyCode === 13 || event.which === 13) {
-      state.isButtonDisabled || handleLogin();
-    }
-  };
 
   const handlecasenameChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
@@ -240,7 +224,7 @@ function SimpleDialog(props) {
 
   return (
     <Dialog onClose={handleClose} open={open}>
-      <DialogTitle className='page-title'><b>Add Document </b></DialogTitle>
+      <DialogTitle className='page-title'><b>Upload Document </b></DialogTitle>
       <Grid item xs={12}>
             <Card>
               <Divider />
@@ -249,12 +233,22 @@ function SimpleDialog(props) {
 
                   <div>
 
-                    <TextField error={state.isError} id="uploadfile"   type="file"  
-                      InputLabelProps={{   shrink: false,  }} onChange={handledescriptionChange}  onKeyPress={handleKeyPress}
-                      className="form-control full-wdth-field" helperText={state.helperText} />
+                  <DropzoneArea
+                  showPreviews={true}
+                  showPreviewsInDropzone={false}
+                  useChipsForPreview
+                  previewGridProps={{container: { spacing: 1, direction: 'row' }}}
+                  previewChipProps={{classes: { root: classes.previewChip } }}
+                  dropzoneText={"Click or drag file to this area to upload"}
+                  previewText="Selected files"
+                  maxFileSize={5000000}
+                  filesLimit = {1}
+                  onChange={handlefileChange}
+          
+                />
 
                   </div>
-                  <Button  size="medium"  variant="text"  className='theme-btn submit' onClick={handleLogin}
+                  <Button  size="medium"  variant="text"  className='theme-btn submit' onClick={handlefileChange}
                     // startIcon={<AddTwoToneIcon fontSize="small" />}
                   > Upload
                   </Button>
@@ -296,6 +290,7 @@ SimpleDialog.propTypes = {
 
 function Modals() {
 
+
   const [open, setOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState(emails[1]);
 
@@ -327,6 +322,7 @@ function Modals() {
         >
          Add Document
         </Button>
+
         
       </Box>
       <Container maxWidth="lg">

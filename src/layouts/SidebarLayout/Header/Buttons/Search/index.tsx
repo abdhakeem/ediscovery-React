@@ -111,8 +111,18 @@ function HeaderSearch() {
       localStorage.setItem('keyword', keyword);
 
       console.log(keyword + ' == ' + caseids + ' == ' + caseid + ' == ' + docid + ' == ' + fileid);
+
+      if(keyword != '' && caseids == null && caseid == null && docid == null && fileid == null) {
+
+        dispatch({
+              type: 'loginFailed',
+              payload: 'Please select a case',
+            });
+    
+
+      }
       
-      if(keyword != '' && caseids !='' && caseid == null && docid == null && fileid == null) {
+      else if(keyword != '' && caseids !='' && caseid == null && docid == null && fileid == null) {
         
         navigate('/dashboards/search/'+caseids);
 
@@ -130,6 +140,7 @@ function HeaderSearch() {
         navigate('/dashboards/search/'+caseid+'/'+docid);
 
       }
+
 
       // else if(keyword != '' && caseids ==null && caseid !='' && docid != '' && fileid != '') {
 

@@ -98,6 +98,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .css-pb771q-MuiInputBase-inpu
     margin: 0 auto !important;
     margin-top: 20px !important;
     display: block !important;
+    font-weight: 500 !important;
 }
 
 .ag-theme-alpine [class^=ag-]:before {

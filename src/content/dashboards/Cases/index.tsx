@@ -26,6 +26,7 @@ function DashboardLogin() {
   const userId = localStorage.getItem('userId');
   localStorage.removeItem('pdocid');
   localStorage.removeItem('pcaseId');
+  localStorage.removeItem('caseIds');
 
   const [rowData, setRowData] = useState([]);
   const gridRef = useRef(null);
