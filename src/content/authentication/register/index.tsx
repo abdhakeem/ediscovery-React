@@ -2,7 +2,7 @@ import {Box, Typography, Hidden, Container, Grid} from '@mui/material';
 import TextField from '@mui/material/TextField';
 import { Helmet } from 'react-helmet-async';
 import Button from '@mui/material/Button';
-import { Navigate } from 'react-router-dom';
+import { Navigate, NavLink } from 'react-router-dom';
 import React, { useReducer, useEffect, useState } from 'react';
 import 'src/style.css';
 import 'src/http-common.ts';
@@ -194,17 +194,15 @@ function LoginUser() {
           alignItems="stretch"
           spacing={0}
         >
-          
-          <Registerui />
 
-          <Grid xs={12} md={6} alignItems="center" display="flex" justifyContent="center" item> <Container maxWidth="sm">
+          <Grid xs={12} md={12} alignItems="center" display="flex" justifyContent="center" item> <Container maxWidth="sm">
             
             <form  noValidate autoComplete="off">
 
               <Box textAlign="center">
-                <img  alt="500"  height={80}  src="/static/images/inabia_ai_logo.png" />
-                <br></br>
-                <br></br>
+                <img  alt="500"  height={100}  src="/static/images/inabia_ai_logo.png" />
+                <h2 className='Login-head' >Sign Up</h2>
+                <p className='Login-subhead'>Scan through thousands of documents in <br></br> minutes with Inabia eBot</p>
     
                 <Typography variant="h2" sx={{ my: 1 }}>
 
@@ -230,9 +228,8 @@ function LoginUser() {
                   Signup
                 </Button>
                 <Typography variant="h6" sx={{ my: 1 }}>
-                  Already have a account login now, <a href="/"
-                  color="red" 
-                  >Signin</a>
+                  Already have a account? <Button  component={NavLink} className="login-links"  to="/login"  > 
+                  login here  </Button>
                 </Typography>
               </Box>
               </form>

@@ -5,9 +5,6 @@ import { Grid, Container, Typography } from '@mui/material';
 import Footer from 'src/components/Footer';
 
 import { useEffect, useMemo, useState, useRef, useCallback, SyntheticEvent } from 'react';
-import { render } from 'react-dom';
-
-import { AgGridColumn, AgGridReact } from 'ag-grid-react';
 
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
@@ -17,16 +14,32 @@ import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import { Card, CardHeader, CardContent, Divider } from '@mui/material';
 
-
-
+import * as React from 'react';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import 'src/style.css';
 import { CellClickedEvent } from 'ag-grid-community';
-import id from 'date-fns/esm/locale/id/index.js';
 import { useNavigate, useParams } from 'react-router';
 import axios from 'axios';
+
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
+import Divider from '@mui/material/Divider';
+
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+
+import { Component } from 'react';
+import { Document, Page } from 'react-pdf';
 
 
 interface TabPanelProps {
@@ -69,12 +82,6 @@ function DashboardLogin() {
 
   const handleChange = (event: SyntheticEvent, newValue: number) => {
     setValue(newValue);
-  };
-
-  const [values, setValues] = useState(0);
-
-  const handleChanges = (event: SyntheticEvent, newValues: number) => {
-    setValue(newValues);
   };
 
   localStorage.removeItem('caseIds');
@@ -241,6 +248,13 @@ function DashboardLogin() {
     defaultToolPanel: '',
 };
 
+const [numPages, setNumPages] = useState(null);
+const [pageNumber, setPageNumber] = useState(1);
+
+function onDocumentLoadSuccess({ numPages }) {
+  setNumPages(numPages);
+}
+
 
   return (
     <>
@@ -262,47 +276,112 @@ function DashboardLogin() {
           spacing={3}
         >
           <Grid item lg={3} xs={12}>
-            123
+          <div className='acc-border'>
+            <div className='acc-heading'>Document Tools</div>
+            <Accordion>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                <Typography>Tagging</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography>
+                <Box sx={{ width: '100%', maxWidth: '100%', bgcolor: 'background.paper' }}>
+                  <nav aria-label="secondary mailbox folders">
+                    <List>
+                      <ListItem disablePadding>
+                        <ListItemButton>
+                        <FormControl>
+                          <FormLabel id="demo-radio-buttons-group-label">Document Relevancy</FormLabel>
+                          <RadioGroup
+                            aria-labelledby="demo-radio-buttons-group-label"
+                            defaultValue="female"
+                            name="radio-buttons-group"
+                          >
+                            <FormControlLabel value="Relevant" control={<Radio />} label="Relevant" />
+                            <FormControlLabel value="Not Relevant" control={<Radio />} label="Not Relevant" />
+                          </RadioGroup>
+                        </FormControl>
+                        </ListItemButton>
+                      </ListItem>
+                      <ListItem disablePadding>
+                        <ListItemButton>
+                        <FormControl>
+                          <FormLabel id="demo-radio-buttons-group-label">Document Confidentiality</FormLabel>
+                          <RadioGroup
+                            aria-labelledby="demo-radio-buttons-group-label"
+                            defaultValue="female"
+                            name="radio-buttons-group"
+                          >
+                            <FormControlLabel value="Confidential" control={<Radio />} label="Confidential" />
+                            <FormControlLabel value="Not Confidential" control={<Radio />} label="Not Confidential" />
+                          </RadioGroup>
+                        </FormControl>
+                        </ListItemButton>
+                      </ListItem>
+                    </List>
+                  </nav>
+                </Box>
+                </Typography>
+              </AccordionDetails>
+            </Accordion>
+
+            <Divider />
+            <Accordion>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                <Typography>Documents</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography>
+                <Box sx={{ width: '100%', maxWidth: '100%', bgcolor: 'background.paper' }}>
+                  <nav aria-label="secondary mailbox folders">
+                    <List>
+                      <ListItem disablePadding>
+                        <ListItemButton>
+                          <ListItemText primary="Document 1" />
+                        </ListItemButton>
+                      </ListItem>
+                      <ListItem disablePadding>
+                        <ListItemButton component="a" href="#simple-list">
+                          <ListItemText primary="Document 2" />
+                        </ListItemButton>
+                      </ListItem>
+                    </List>
+                  </nav>
+                </Box>
+                </Typography>
+              </AccordionDetails>
+            </Accordion>
+          </div>
       
           </Grid>
 
-          <Grid item lg={6} xs={12}>
+          <Grid item lg={5} xs={12}>
+          <object className='pdfviewer' width="100%" height="400" data="http://www.africau.edu/images/default/sample.pdf" type="application/pdf">   </object>
+
+          </Grid>
+
+          <Grid item lg={4} xs={12}>
+
                 <Box sx={{ width: '100%' }}>
                   <Tabs variant="scrollable"
                     scrollButtons="auto"
                     textColor="primary"
                     indicatorColor="primary" value={value} onChange={handleChange} aria-label="basic tabs example">
-                    <Tab label="Item One" {...a11yProps(0)} />
-                    <Tab label="Item Two" {...a11yProps(1)} />
-                    <Tab label="Item Three" {...a11yProps(2)} />
+                    <Tab label="Extracted Text" {...a11yProps(0)} />
+                    <Tab label="Table Data" {...a11yProps(1)} />
                   </Tabs>
                   <TabPanel value={value} index={0}>
-                    Item One
+                    Raw Data here...
                   </TabPanel>
                   <TabPanel value={value} index={1}>
-                    Item Two
-                  </TabPanel>
-                  <TabPanel value={value} index={2}>
-                    Item Three
-                  </TabPanel>
-                </Box>
-
-          </Grid>
-
-          <Grid item lg={3} xs={12}>
-          <Box sx={{ width: '100%' }}>
-                  <Tabs variant="scrollable"
-                    scrollButtons="auto"
-                    textColor="primary"
-                    indicatorColor="primary" value={values} onChange={handleChanges} aria-label="basic tabs example">
-                    <Tab label="Item three" {...a11yProps(3)} />
-                    <Tab label="Item four" {...a11yProps(4)} />
-                  </Tabs>
-                  <TabPanel value={values} index={3}>
-                    Item three
-                  </TabPanel>
-                  <TabPanel value={values} index={4}>
-                    Item four
+                    Table Data here...
                   </TabPanel>
                 </Box>
       

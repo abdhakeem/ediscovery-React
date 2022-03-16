@@ -1,25 +1,14 @@
 .loginbtn {
-    cursor: pointer;
-    display: inline-block;
-    font-size: 17px;
-    font-weight: 500;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    outline: none;
-    border: 0;
-    color: #fff;
-    border-radius: 45px;
-    background-color: #1e0040;
-    padding: 10px 36px;
-    margin-bottom: 10px;
-    margin-right: 10px;
-    -webkit-transition: all 0.3s ease-in-out;
-    -o-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
+    background-color: #f78f1b !important;
+    width: 100px;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    border-radius: 3px !important;
+
 }
 
 .loginbtn:hover, .loginbtn:active {
-    background-color: #3a0478;
+    background-color: #e17d0e !important;
 }
 
 .login-bg {
@@ -73,6 +62,10 @@ a {
 input {
     background: white  !important;
     color: #000 !important;
+}
+
+.MuiInputBase-root {
+    border-radius: 3px !important;
 }
 
 label[data-shrink=false]+.MuiInputBase-formControl .css-pb771q-MuiInputBase-input-MuiOutlinedInput-input {
@@ -139,6 +132,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .css-pb771q-MuiInputBase-inpu
     font-weight: 600;
     letter-spacing: -1px;
     margin: 0px;
+    color: #fff !important;
 }
 
 
@@ -146,6 +140,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .css-pb771q-MuiInputBase-inpu
     font-size: 16px;
     margin: 0px;
     font-weight: 500;
+    color: #fff !important;
 }
 
 .HeaderContent-container {
@@ -290,9 +285,9 @@ label[data-shrink=false]+.MuiInputBase-formControl .css-pb771q-MuiInputBase-inpu
     font-size: 20px !important;
 }
 
-/* .MuiTypography-subtitle1 {
-    display: none !important;
-} */
+.MuiCardContent-root > form > div > span {
+    display: none;
+}
 
 .MuiGrid-spacing-xs-1 {
     margin-top: 10px !important;
@@ -303,4 +298,237 @@ label[data-shrink=false]+.MuiInputBase-formControl .css-pb771q-MuiInputBase-inpu
     display: block !important;
     margin-top: 10px !important;
     width: max-content !important;
+}
+
+body {
+    background: white !important;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+    color: #000 !important;
+}
+
+.css-s3gjr6-MuiTabs-root {
+    background: #f3f3f3 !important;
+}
+
+.css-1kgk43m-MuiButtonBase-root-MuiTab-root.MuiButtonBase-root {
+    min-width: 50% !important;
+}
+
+.css-s3gjr6-MuiTabs-root .MuiTabs-scrollButtons {
+    width: 0px !important;
+    display: none !important;
+}
+
+.css-8atqhb {
+    border: 1px solid #d9d9d9 !important;
+    border-radius: 0px !important;
+}
+
+.css-1kgk43m-MuiButtonBase-root-MuiTab-root.MuiButtonBase-root {
+    color: #9d9d9d !important;
+    font-weight: 500 !important;
+}
+
+.css-1kgk43m-MuiButtonBase-root-MuiTab-root.Mui-selected {
+    color: #fff !important;
+}
+
+.css-1n7n5hj-MuiPaper-root {
+    border: 1px solid #dfdfdf !important;
+}
+
+
+.css-1kgk43m-MuiButtonBase-root-MuiTab-root.Mui-selected, .css-1kgk43m-MuiButtonBase-root-MuiTab-root.Mui-selected:hover {
+    background: #303030 !important;
+    border-radius: 0px !important;
+    box-shadow: 0px 2px 6px #afafaf !important;
+}
+
+.css-188r3fk-MuiButtonBase-root-MuiListItem-root.MuiButtonBase-root {
+    color: #000 !important;
+}
+
+.css-1tmlvs-MuiTypography-root {
+    color: #000 !important;
+    font-weight: 500 !important;;
+}
+
+.css-o7ndf7 {
+    color: #000 !important;
+}
+
+.css-14v8uxc-MuiTypography-root {
+    display: none !important;
+}
+
+.css-p9hwbn {
+    padding: 0px 40px;
+}
+
+.css-19kzrtu {
+    height: 600px !important;
+}
+
+.css-plkrbv-MuiTypography-root {
+    color: #000 !important;
+}
+
+.acc-heading {
+    background: #303030;
+    color: #fff;
+    padding: 8px 15px;
+}
+
+.css-yapgmo-MuiButtonBase-root-MuiAccordionSummary-root {
+    border-radius: 0px !important;
+    background: white !important;
+}
+
+.css-1yim2dd-MuiSvgIcon-root {
+    color: #5c5c5c !important;
+}
+
+.css-o4b71y-MuiAccordionSummary-content.Mui-expanded {
+    margin: 10px 0 !important;
+}
+
+.css-1wm59ze-MuiButtonBase-root-MuiListItemButton-root {
+    padding-top: 0px !important;
+}
+
+.css-1wm59ze-MuiButtonBase-root-MuiListItemButton-root:hover {
+    background-color: #f2f2f2 !important;
+}
+
+
+.acc-border {
+    border: 1px solid #d9d9d9 !important;
+}
+
+.css-5ce02n-MuiList-root {
+    padding: 0px !important;
+}
+
+.css-yapgmo-MuiButtonBase-root-MuiAccordionSummary-root.Mui-expanded {
+    min-height: 45px !important;
+    margin-top: 5px !important;
+}
+
+.css-15v22id-MuiAccordionDetails-root {
+    padding: 5px 5px 7px !important;;
+}
+
+.css-ejp5yu-MuiButtonBase-root-MuiRadio-root.Mui-checked {
+    color: #f78f1b !important;
+}
+
+.pdfviewer {
+    height: 630px !important;
+}
+
+
+.css-188r3fk-MuiButtonBase-root-MuiListItem-root.MuiButtonBase-root:hover {
+  background: #f79527 !important;
+  color: #fff !important;
+}
+
+.MuiBox-root > a > button:hover {
+    background: #f79527 !important;
+    color: #fff !important;
+    
+}
+
+.MuiBox-root > a {
+    text-decoration: none !important;
+}
+
+.css-hpj8ol-MuiButtonBase-root-MuiButton-root {
+    color: #8d8d8d !important;
+    font-weight: 500 !important;
+}
+
+.css-u376pe-MuiFormLabel-root {
+    color: #000 !important;
+    font-weight: 600 !important;
+    font-size: 13px !important;
+}
+
+.login-links {
+    padding: 0px 7px !important;
+    color: #f78f1b !important;
+    background: transparent !important;
+    font-weight: 500 !important;
+}
+
+.login-links:hover {
+    text-decoration: underline !important;
+}
+
+.Login-head {
+    margin-bottom: 0px !important;
+}
+
+.Login-subhead {
+    margin-top: 5px !important;
+}
+
+.social-btn {
+    margin: 0 auto !important;
+    margin-top: 10px !important;
+    width: 60% !important;
+    font-size: 15px !important;
+    height: 40px !important;
+}
+
+.social-btn > div {
+display: inline-flex !important;
+}
+
+.social-btn > div > div > svg {
+    width: 18px !important;
+}
+
+.main-content {
+    background: #f7f7f7 !important;
+}
+
+.top-menu-item {
+    background: transparent !important;
+}
+
+.top-menu-item:hover {
+    color: #f78f1b !important;
+}
+
+.css-wp3acn-MuiList-root .MuiListItem-button {
+    background: transparent !important;
+}
+
+.css-1ym6sa1-MuiButtonBase-root-MuiIconButton-root:hover {
+    background-color: transparent !important;
+}
+
+.css-129w9z6-MuiButtonBase-root-MuiIconButton-root:hover {
+    background-color: #f78f1b !important;
+}
+
+.css-129w9z6-MuiButtonBase-root-MuiIconButton-root:hover > .css-1yim2dd-MuiSvgIcon-root {
+    color: #fff !important;
+}
+
+.ag-theme-alpine .ag-ltr input[class^=ag-][type=text] {
+    border: 1px solid #cbcbcb !important;
+}
+
+.Breadcrumb-heading{
+    float: left !important;
+    width: 100%;
+    margin-bottom: 0px;
+}
+
+.Breadcrumb-link {
+    float: left !important;
+    width: 100%;
 }

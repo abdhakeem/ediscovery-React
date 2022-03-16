@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-
+import SettingsIcon from '@mui/icons-material/Settings';
 import { NavLink, useNavigate } from 'react-router-dom';
 
 import {
@@ -140,9 +140,10 @@ function HeaderUserbox() {
         <List sx={{ p: 1 }} component="nav">
           <ListItem
             button
-            to="/dashboards/cases"
+            to="/dashboards/settings"
             component={NavLink}
           >
+            <SettingsIcon fontSize="small" />
             <ListItemText primary="Settings" />
           </ListItem>
          {/*  <ListItem

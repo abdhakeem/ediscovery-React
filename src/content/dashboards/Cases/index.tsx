@@ -18,6 +18,7 @@ import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 
 
 import 'src/style.css';
+
 import { CellClickedEvent } from 'ag-grid-community';
 import id from 'date-fns/esm/locale/id/index.js';
 import { useNavigate, useParams } from 'react-router';
@@ -41,15 +42,17 @@ function DashboardLogin() {
     filter: true,
     resizable: true,
   };
+  
 
    const [columnDefs] = useState([
        //{ field: "make", sortable: true, filter: true, checkboxSelection: true, floatingFilter: true, rowGroup: false, rowDrag: false, width: 300 },
        { headerName: 'S. NO', field: "id", sortable: true, filter: true, checkboxSelection: true, floatingFilter: true, rowGroup: false, rowDrag: false, headerCheckboxSelection: true, width: 150 },
-       { headerName: 'CASE ID', field: "caseId", sortable: true, filter: true, floatingFilter: true, width: 400},
+       { headerName: 'CASE ID', field: "caseId", filter: true, floatingFilter: true, width: 400},
        { headerName: 'CASE NAME', field: "projectname", sortable: true, filter: true, floatingFilter: true, width: 400},
        { headerName: 'CASE CREATED (PST)', field: "created_at", sortable: true, filter: true, floatingFilter: true, width: 250 },
 
    ]);   
+
    
     const enableFillHandle = true;
 

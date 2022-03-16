@@ -1,4 +1,4 @@
-import {Box, Typography, Hidden, Container, Grid} from '@mui/material';
+import {Box, Typography, Hidden, Container, Grid, Divider} from '@mui/material';
 import TextField from '@mui/material/TextField';
 import { Helmet } from 'react-helmet-async';
 import Button from '@mui/material/Button';
@@ -8,6 +8,8 @@ import 'src/style.css';
 import 'src/http-common.ts';
 import Loginleft from './loginui/left-side';
 import axios from 'axios';
+import { NavLink } from 'react-router-dom';
+import { FacebookLoginButton, LinkedInLoginButton, GoogleLoginButton } from "react-social-login-buttons";
 
 
 //state type
@@ -194,25 +196,38 @@ function LoginUser() {
       });
     }
 
+
+  const Googlesdk = () => {
+    alert('Google');
+  }
+
+  const Facebooksdk = () => {
+    alert('Facebook');
+  }
+
+  const Linkedinsdk = () => {
+    alert('Linkedin');
+  }
+
   return (
     <>
 
       
       <Helmet>
-        <title>Inabia - ediscovery</title>
+        <title>Login - Inabia ediscovery</title>
       </Helmet>
       <div className='main-content'>
         <Grid container  sx={{ height: '100%' }}  alignItems="stretch"  spacing={0}>
-          <Loginleft />
 
-          <Grid xs={12} md={6} alignItems="center" display="flex" justifyContent="center" item> <Container maxWidth="sm">
+          <Grid xs={12} md={12} alignItems="center" display="flex" justifyContent="center" item> <Container maxWidth="sm">
             
             <form  noValidate autoComplete="off">
 
               <Box textAlign="center">
-                <img  alt="500"  height={80}  src="/static/images/inabia_ai_logo.png" />
-                <br></br>
-                <br></br>
+                <img  alt="500"  height={100}  src="/static/images/inabia_ai_logo.png" />
+
+                <h2 className='Login-head' >Log In</h2>
+                <p className='Login-subhead'>Scan through thousands of documents in <br></br> minutes with Inabia eBot</p>
     
                 <Typography variant="h2" sx={{ my: 1 }}>
                 
@@ -235,12 +250,19 @@ function LoginUser() {
                 startIcon={<RefreshTwoToneIcon />}>  Refresh view  </LoadingButton> */}
                 <Button  variant="contained"  sx={{ mb: 2 }}  //className={classes.loginBtn}
                 className ="loginbtn"  onClick={handleLogin}   >
-                  Signin
+                  LOG IN
                 </Button>
                 <Typography variant="h6" sx={{ my: 1 }}>
-                  Don't have a account, <a href="register" 
-                  color="red" 
-                  > register now</a>
+              
+                  <Button  component={NavLink} className="login-links"  to="/register"  > 
+                  Create account  </Button> | <Button  component={NavLink} className="login-links"  to="/"  > 
+                  Forget password?  </Button>
+                </Typography>
+                <Divider/>
+                <Typography variant="h6" sx={{ my: 1 }}>
+                <GoogleLoginButton className='social-btn' onClick={Googlesdk} style={{marginTop: '20px'}}/>
+                <FacebookLoginButton className='social-btn' onClick={Facebooksdk} />
+                <LinkedInLoginButton className='social-btn' onClick={Linkedinsdk} />
                 </Typography>
               </Box>
               </form>
