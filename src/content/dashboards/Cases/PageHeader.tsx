@@ -240,7 +240,7 @@ function SimpleDialog(props) {
 
   return (
     <Dialog onClose={handleClose} open={open}>
-      <DialogTitle className='page-title'><b>Create Case </b></DialogTitle>
+      <DialogTitle className='page-title'><b>ADD NEW CASE </b></DialogTitle>
       <Grid item xs={12}>
             <Card>
               <Divider />
@@ -250,24 +250,24 @@ function SimpleDialog(props) {
                   <div>
                   <TextField error={state.isError} id="casename"  label="Case Name"  type="text"  placeholder='Enter Case Name'
                     InputLabelProps={{  shrink: true,  }}  onChange={handlecasenameChange}  onKeyPress={handleKeyPress} 
-                    className="form-control" />
+                    className="Cases-field" />
                   
                   <TextField error={state.isError} id="caseid"  label="Case ID"  type="text"  placeholder='Enter Case ID'
                       InputLabelProps={{  shrink: true,  }} onChange={handlecaseidChange}  onKeyPress={handleKeyPress}
-                      className="form-control" />
+                      className="Cases-field" />
                   
                   <TextField error={state.isError} id="company"  label="Company"  type="text"  placeholder='Enter Company'
                     InputLabelProps={{ shrink: true,  }} onChange={handlecompanyChange}  onKeyPress={handleKeyPress}
-                      className="form-control" />
+                      className="Cases-field" />
 
                     <TextField error={state.isError} id="description"  label="Description"  type="text"  placeholder='Enter Description'
                       InputLabelProps={{   shrink: true,  }} onChange={handledescriptionChange}  onKeyPress={handleKeyPress}
-                      className="form-control" helperText={state.helperText} />
+                      className="Cases-field" helperText={state.helperText} />
 
                   </div>
                   <Button  size="medium"  variant="text"  className='theme-btn submit' onClick={handleLogin}
                     // startIcon={<AddTwoToneIcon fontSize="small" />}
-                  > Create
+                  > ADD CASE
                   </Button>
                   
                 </form>
@@ -336,7 +336,7 @@ function Modals() {
           className='theme-btn'
           startIcon={<AddTwoToneIcon fontSize="small" />}
         >
-         Create Case
+         ADD NEW CASE
         </Button>
         
       </Box>

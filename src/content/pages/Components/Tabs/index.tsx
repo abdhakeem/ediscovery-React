@@ -94,6 +94,26 @@ function TabsDemo() {
                     Item Three
                   </TabPanel>
                 </Box>
+
+                <Box sx={{ width: '100%' }}>
+                  <Tabs variant="scrollable"
+                    scrollButtons="auto"
+                    textColor="primary"
+                    indicatorColor="primary" value={value} onChange={handleChange} aria-label="basic tabs example">
+                    <Tab label="Item One" {...a11yProps(3)} />
+                    <Tab label="Item Two" {...a11yProps(4)} />
+                    <Tab label="Item Three" {...a11yProps(5)} />
+                  </Tabs>
+                  <TabPanel value={value} index={3}>
+                    Item One
+                  </TabPanel>
+                  <TabPanel value={value} index={4}>
+                    Item Two
+                  </TabPanel>
+                  <TabPanel value={value} index={5}>
+                    Item Three
+                  </TabPanel>
+                </Box>
               </CardContent>
             </Card>
           </Grid>

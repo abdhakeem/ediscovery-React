@@ -224,14 +224,14 @@ function HeaderSearch() {
         </IconButton>
       </Tooltip>
 
-      <Tooltip arrow title="Search">
+      <Tooltip arrow title="Cases">
         <IconButton>
         <List disablePadding component={Box} display="flex">
           <ListItem
             classes={{ root: 'MuiListItem-indicators' }}
             button
             component={NavLink}
-            to="/components/buttons"
+            to="/dashboards/cases"
           >
             <ListItemText
               primaryTypographyProps={{ noWrap: true }}

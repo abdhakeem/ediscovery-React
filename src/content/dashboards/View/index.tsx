@@ -71,8 +71,10 @@ function DashboardLogin() {
     setValue(newValue);
   };
 
-  const handleChanges = (event: SyntheticEvent, newValue: number) => {
-    setValue(newValue);
+  const [values, setValues] = useState(0);
+
+  const handleChanges = (event: SyntheticEvent, newValues: number) => {
+    setValue(newValues);
   };
 
   localStorage.removeItem('caseIds');
@@ -292,14 +294,14 @@ function DashboardLogin() {
                   <Tabs variant="scrollable"
                     scrollButtons="auto"
                     textColor="primary"
-                    indicatorColor="primary" value={value} onChange={handleChanges} aria-label="basic tabs example">
+                    indicatorColor="primary" value={values} onChange={handleChanges} aria-label="basic tabs example">
                     <Tab label="Item three" {...a11yProps(3)} />
                     <Tab label="Item four" {...a11yProps(4)} />
                   </Tabs>
-                  <TabPanel value={value} index={3}>
+                  <TabPanel value={values} index={3}>
                     Item three
                   </TabPanel>
-                  <TabPanel value={value} index={4}>
+                  <TabPanel value={values} index={4}>
                     Item four
                   </TabPanel>
                 </Box>
