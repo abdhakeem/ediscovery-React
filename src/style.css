@@ -4,6 +4,7 @@
     font-weight: 500 !important;
     font-size: 14px !important;
     border-radius: 3px !important;
+    color: #fff !important;
 
 }
 
@@ -361,7 +362,7 @@ p, h1, h2, h3, h4, h5, h6 {
     color: #000 !important;
 }
 
-.css-14v8uxc-MuiTypography-root {
+.position{
     display: none !important;
 }
 
@@ -610,10 +611,23 @@ label {
     font-size: 12px !important;
     padding: 6px 7px !important;
     width: 50% !important;
+    font-weight: 600 !important;
 }
 
 .td-text {
     padding: 6px 7px !important;
     color: #000;
     font-size: 13px !important;
+}
+
+.header-email {
+    color: #000 !important;
+}
+
+.MuiIconButton-root:hover {
+    background: transparent !important;
+}
+
+.MuiTabs-scrollButtons {
+    display: none !important;
 }
