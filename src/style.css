@@ -622,6 +622,13 @@ label {
 
 .header-email {
     color: #000 !important;
+    font-weight: 500 !important;
+}
+
+.header-emails {
+    color: #000 !important;
+    font-weight: 500 !important;
+    margin-top: 10px !important;
 }
 
 .MuiIconButton-root:hover {
@@ -630,4 +637,8 @@ label {
 
 .MuiTabs-scrollButtons {
     display: none !important;
+}
+
+.searchpage {
+    border: 1px solid #e1e1e1 !important;
 }

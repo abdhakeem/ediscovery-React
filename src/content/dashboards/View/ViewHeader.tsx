@@ -381,7 +381,7 @@ function Modals() {
       sx={{ pb: 3 }}
       >
         <Typography variant="h3" className='page-title' sx={{ ml: 1, flex: 0.5}} noWrap title={filename} >{filename}</Typography>
-        <Paper
+        <Paper className='searchpage'
           component="form"
           sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400, flex: 0.45 }}
         >

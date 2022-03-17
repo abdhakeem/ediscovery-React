@@ -3,7 +3,7 @@ import '@mui/lab/themeAugmentation';
 
 const themeColors = {
   primary: '#f78f1b',
-  secondary: '#6E759F',
+  secondary: '#f78f1b',
   success: '#44D600',
   warning: '#FFA319',
   error: '#FF1943',

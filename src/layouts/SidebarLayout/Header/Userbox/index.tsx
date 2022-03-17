@@ -130,8 +130,8 @@ function HeaderUserbox() {
         <MenuUserBox sx={{ minWidth: 210 }} display="flex">
           <Avatar variant="rounded" alt={user.email} src={user.avatar} />
           <UserBoxText>
-            <UserBoxLabel variant="body1">{user.email}</UserBoxLabel>
-            <UserBoxDescription variant="body2">
+            <UserBoxLabel variant="body1" className='header-emails'>{user.email}</UserBoxLabel>
+            <UserBoxDescription variant="body2" className='position'>
               {user.jobtitle}
             </UserBoxDescription>
           </UserBoxText>
