@@ -302,6 +302,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .css-pb771q-MuiInputBase-inpu
 
 body {
     background: white !important;
+    color: #000 !important;
 }
 
 p, h1, h2, h3, h4, h5, h6 {
@@ -312,7 +313,7 @@ p, h1, h2, h3, h4, h5, h6 {
     background: #f3f3f3 !important;
 }
 
-.css-1kgk43m-MuiButtonBase-root-MuiTab-root.MuiButtonBase-root {
+.MuiTab-textColorPrimary {
     min-width: 50% !important;
 }
 
@@ -326,7 +327,7 @@ p, h1, h2, h3, h4, h5, h6 {
     border-radius: 0px !important;
 }
 
-.css-1kgk43m-MuiButtonBase-root-MuiTab-root.MuiButtonBase-root {
+.MuiTab-textColorPrimary {
     color: #9d9d9d !important;
     font-weight: 500 !important;
 }
@@ -335,15 +336,16 @@ p, h1, h2, h3, h4, h5, h6 {
     color: #fff !important;
 }
 
-.css-1n7n5hj-MuiPaper-root {
+/* .MuiPaper-rounded {
     border: 1px solid #dfdfdf !important;
-}
+} */
 
 
-.css-1kgk43m-MuiButtonBase-root-MuiTab-root.Mui-selected, .css-1kgk43m-MuiButtonBase-root-MuiTab-root.Mui-selected:hover {
+.Mui-selected, .MuiTab-textColorPrimary:hover {
     background: #303030 !important;
     border-radius: 0px !important;
     box-shadow: 0px 2px 6px #afafaf !important;
+    color: #fff !important;
 }
 
 .css-188r3fk-MuiButtonBase-root-MuiListItem-root.MuiButtonBase-root {
@@ -381,14 +383,7 @@ p, h1, h2, h3, h4, h5, h6 {
     padding: 8px 15px;
 }
 
-.css-yapgmo-MuiButtonBase-root-MuiAccordionSummary-root {
-    border-radius: 0px !important;
-    background: white !important;
-}
 
-.css-1yim2dd-MuiSvgIcon-root {
-    color: #5c5c5c !important;
-}
 
 .css-o4b71y-MuiAccordionSummary-content.Mui-expanded {
     margin: 10px 0 !important;
@@ -510,11 +505,15 @@ display: inline-flex !important;
     background-color: transparent !important;
 }
 
-.css-129w9z6-MuiButtonBase-root-MuiIconButton-root:hover {
+.MuiIconButton-colorPrimary:hover {
     background-color: #f78f1b !important;
 }
 
-.css-129w9z6-MuiButtonBase-root-MuiIconButton-root:hover > .css-1yim2dd-MuiSvgIcon-root {
+.MuiIconButton-colorPrimary:hover > .css-1yim2dd-MuiSvgIcon-root {
+    color: #fff !important;
+}
+
+.MuiButtonBase-root:hover > svg {
     color: #fff !important;
 }
 
@@ -524,11 +523,97 @@ display: inline-flex !important;
 
 .Breadcrumb-heading{
     float: left !important;
-    width: 100%;
-    margin-bottom: 0px;
+    width: 100% !important;
+    margin-bottom: 0px !important;
 }
 
 .Breadcrumb-link {
     float: left !important;
-    width: 100%;
+    width: 100% !important;
+}
+
+
+.nav-item {
+    color: #000 !important;
+}
+
+.nav-item:hover {
+    color: #f78f1b !important;
+}
+
+.MuiListItemButton-gutters {
+    background-color: transparent !important;
+}
+
+label {
+    color: #000 !important;
+}
+
+.acc-head {
+    color: #000 !important;
+}
+
+
+.user-item {
+    color: #000 !important;
+}
+
+.user-item:hover  {
+    background: #f78f1b !important;
+    color: #fff !important;
+}
+
+.meta-btn {
+    margin: 0px !important;
+    margin-top: 0px !important;
+}
+
+.documentc-btn {
+    margin: 0 auto !important;
+    margin-bottom: 8px !important;
+}
+
+.download-btn {
+    margin-bottom: 15px !important;
+    margin-top: 0px !important;
+    float: right;
+    font-weight: 500 !important;
+}
+
+
+.raw-data {
+    width: 100% !important;
+    display: flex !important;
+}
+
+.table-responsive {
+    overflow-x: auto !important;
+    display: block !important;
+    width: 100% !important;
+}
+
+.card-table {
+    text-align: left !important;
+    border-spacing: 0px;
+    border: 1px solid #d3d3d3;
+    width: 500px;
+}
+
+.thead-bg{
+    background: #f78f1b !important;
+    color: #fff !important;
+    
+}
+
+.th-text {
+    border: 1px solid #cb802c !important;
+    font-size: 12px !important;
+    padding: 6px 7px !important;
+    width: 50% !important;
+}
+
+.td-text {
+    padding: 6px 7px !important;
+    color: #000;
+    font-size: 13px !important;
 }

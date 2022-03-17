@@ -244,37 +244,80 @@ function SimpleDialog(props) {
 
   return (
     <Dialog onClose={handleClose} open={open}>
-      <DialogTitle className='page-title'><b>Create Case </b></DialogTitle>
+      <DialogTitle className='page-title'><b>Meta Data</b></DialogTitle>
       <Grid item xs={12}>
             <Card>
               <Divider />
               <CardContent>
-              <form  noValidate autoComplete="off">
+              <div className="table-responsive">
+                <table className="table card-table table-vcenter text-nowrap datatable">
+                  <thead className='thead-bg'>
+                    <tr>
+                      <th className='th-text'>Key</th>
+                      <td className='th-text'> Value</td>
 
-                  <div>
-                  <TextField error={state.isError} id="casename"  label="Case Name"  type="text"  placeholder='Enter Case Name'
-                    InputLabelProps={{  shrink: true,  }}  onChange={handlecasenameChange}  onKeyPress={handleKeyPress} 
-                    className="form-control" />
-                  
-                  <TextField error={state.isError} id="caseid"  label="Case ID"  type="text"  placeholder='Enter Case ID'
-                      InputLabelProps={{  shrink: true,  }} onChange={handlecaseidChange}  onKeyPress={handleKeyPress}
-                      className="form-control" />
-                  
-                  <TextField error={state.isError} id="company"  label="Company"  type="text"  placeholder='Enter Company'
-                    InputLabelProps={{ shrink: true,  }} onChange={handlecompanyChange}  onKeyPress={handleKeyPress}
-                      className="form-control" />
+                    </tr>
+                  </thead>
+                    <tbody>
+                      
 
-                    <TextField error={state.isError} id="description"  label="Description"  type="text"  placeholder='Enter Description'
-                      InputLabelProps={{   shrink: true,  }} onChange={handledescriptionChange}  onKeyPress={handleKeyPress}
-                      className="form-control" helperText={state.helperText} />
+                          <tr>
+                          <td className='td-text'>Filename</td>
+                          <td className='td-text'>-</td>
+                          </tr>
+                          <tr>
+                          <td className='td-text'>Author</td>
+                          <td className='td-text'>-</td>
+                          </tr>
+                          <tr>
+                          <td className='td-text'>Content Type</td>
+                          <td className='td-text'>-</td>
+                          </tr>
+                          <tr>
+                          <td className='td-text'>Parsed By</td>
+                          <td className='td-text'>-</td>
+                          </tr>
+                          <tr>
+                          <td className='td-text'>Creation Date</td>
+                          <td className='td-text'>-</td>
+                          </tr>
+                          <tr>
+                          <td className='td-text'>-</td>
+                          <td className='td-text'>-</td>
+                          </tr>
+                          <tr>
+                          <td className='td-text'>-</td>
+                          <td className='td-text'>-</td>
+                          </tr>
+                          <tr>
+                          <td className='td-text'>Dc Terms Created</td>
+                          <td className='td-text'>-</td>
+                          </tr>
+                          <tr>
+                          <td className='td-text'>Dc Terms Modified</td>
+                          <td className='td-text'>-</td>
+                          </tr>
+                          <tr>
+                          <td className='td-text'>Dc Creator</td>
+                          <td className='td-text'>-</td>
+                          </tr>
+                          <tr>
+                          <td className='td-text'>Meta Creation Date</td>
+                          <td className='td-text'>-</td>
+                          </tr>
+                          <tr>
+                          <td className='td-text'>File Size</td>
+                          <td className='td-text'>-
+                          </td>
+                          </tr>
+                                
+                                
 
-                  </div>
-                  <Button  size="medium"  variant="text"  className='theme-btn submit' onClick={handleLogin}
-                    // startIcon={<AddTwoToneIcon fontSize="small" />}
-                  > Create
-                  </Button>
-                  
-                </form>
+                      
+                                                                                                                  
+                    </tbody>
+                </table>
+                      </div>
               </CardContent>
             </Card>
           </Grid>
@@ -350,10 +393,17 @@ function Modals() {
           <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
             <SearchIcon />
           </IconButton>
+      
           <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
 
         </Paper>
         
+        <Button  size="medium"  variant="text"  className='theme-btn submit meta-btn'
+                    // startIcon={<AddTwoToneIcon fontSize="small" />}
+                    onClick={handleClickOpen}
+                  > Meta Data
+                  </Button>
+
       </Box>
       <Container maxWidth="lg">
         <Grid

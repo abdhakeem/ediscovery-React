@@ -1,11 +1,11 @@
 import { Helmet } from 'react-helmet-async';
 import PageHeader from './ViewHeader';
 import PageTitleWrapper from 'src/components/PageTitleWrapper';
-import { Grid, Container, Typography } from '@mui/material';
+import { Grid, Container, Typography, Button } from '@mui/material';
 import Footer from 'src/components/Footer';
 
 import { useEffect, useMemo, useState, useRef, useCallback, SyntheticEvent } from 'react';
-
+import DownloadIcon from '@mui/icons-material/Download';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import 'ag-grid-enterprise';
@@ -283,18 +283,19 @@ function onDocumentLoadSuccess({ numPages }) {
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1a-content"
                 id="panel1a-header"
+                className='acc-head'
               >
-                <Typography>Tagging</Typography>
+                <Typography className='acc-head'>Tagging</Typography>
               </AccordionSummary>
               <AccordionDetails>
-                <Typography>
+                <Typography className='acc-head'>
                 <Box sx={{ width: '100%', maxWidth: '100%', bgcolor: 'background.paper' }}>
                   <nav aria-label="secondary mailbox folders">
-                    <List>
+                    <List className='acc-head'>
                       <ListItem disablePadding>
                         <ListItemButton>
                         <FormControl>
-                          <FormLabel id="demo-radio-buttons-group-label">Document Relevancy</FormLabel>
+                          <FormLabel id="demo-radio-buttons-group-label" className='acc-head'>Document Relevancy</FormLabel>
                           <RadioGroup
                             aria-labelledby="demo-radio-buttons-group-label"
                             defaultValue="female"
@@ -309,7 +310,7 @@ function onDocumentLoadSuccess({ numPages }) {
                       <ListItem disablePadding>
                         <ListItemButton>
                         <FormControl>
-                          <FormLabel id="demo-radio-buttons-group-label">Document Confidentiality</FormLabel>
+                          <FormLabel id="demo-radio-buttons-group-label" className='acc-head'>Document Confidentiality</FormLabel>
                           <RadioGroup
                             aria-labelledby="demo-radio-buttons-group-label"
                             defaultValue="female"
@@ -325,23 +326,30 @@ function onDocumentLoadSuccess({ numPages }) {
                   </nav>
                 </Box>
                 </Typography>
+
+                <Button  size="small"  variant="text"  className='theme-btn submit documentc-btn'
+                    // startIcon={<AddTwoToneIcon fontSize="small" />}
+                  > Save
+                  </Button>
+                  
               </AccordionDetails>
             </Accordion>
-
+           
             <Divider />
-            <Accordion>
+            <Accordion className='acc-head'>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1a-content"
                 id="panel1a-header"
+                className='acc-head'
               >
-                <Typography>Documents</Typography>
+                <Typography  className='acc-head'>Documents</Typography>
               </AccordionSummary>
               <AccordionDetails>
-                <Typography>
+                <Typography className='acc-head'>
                 <Box sx={{ width: '100%', maxWidth: '100%', bgcolor: 'background.paper' }}>
                   <nav aria-label="secondary mailbox folders">
-                    <List>
+                    <List className='acc-head'>
                       <ListItem disablePadding>
                         <ListItemButton>
                           <ListItemText primary="Document 1" />
@@ -363,7 +371,7 @@ function onDocumentLoadSuccess({ numPages }) {
           </Grid>
 
           <Grid item lg={5} xs={12}>
-          <object className='pdfviewer' width="100%" height="400" data="http://www.africau.edu/images/default/sample.pdf" type="application/pdf">   </object>
+          <object className='pdfviewer' width="100%" height="400" data="https://ediscovery.inabia.ai/storage/uploads/1/1/cpi_1647417946/readme.pdf" type="application/pdf">   </object>
 
           </Grid>
 
@@ -378,7 +386,15 @@ function onDocumentLoadSuccess({ numPages }) {
                     <Tab label="Table Data" {...a11yProps(1)} />
                   </Tabs>
                   <TabPanel value={value} index={0}>
+                    <div>
+                  <Button  size="small"  variant="text"  className='theme-btn download-btn'
+                    startIcon={<DownloadIcon fontSize="small" />}
+                  > Download
+                  </Button>
+                  </div>
+                  <div className='raw-data'>
                     Raw Data here...
+                    </div>
                   </TabPanel>
                   <TabPanel value={value} index={1}>
                     Table Data here...

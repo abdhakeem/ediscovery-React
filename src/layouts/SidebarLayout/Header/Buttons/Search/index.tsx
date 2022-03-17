@@ -220,7 +220,7 @@ function HeaderSearch() {
     <>
       <Tooltip arrow title="Search">
         <IconButton color="primary" onClick={handleClickOpen}>
-          <SearchTwoToneIcon />
+          <SearchTwoToneIcon className='nav-item'/>
         </IconButton>
       </Tooltip>
 
@@ -237,6 +237,7 @@ function HeaderSearch() {
             <ListItemText
               primaryTypographyProps={{ noWrap: true }}
               primary="Cases"
+              className='nav-item'
             />
           </ListItem>
           

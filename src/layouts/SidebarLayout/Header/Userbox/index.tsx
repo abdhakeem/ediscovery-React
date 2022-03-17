@@ -142,6 +142,7 @@ function HeaderUserbox() {
             button
             to="/dashboards/settings"
             component={NavLink}
+            className='user-item'
           >
             <SettingsIcon fontSize="small" />
             <ListItemText primary="Settings" />
@@ -156,9 +157,9 @@ function HeaderUserbox() {
           </ListItem> */}
         </List>
         <Divider />
-        <Box sx={{ m: 1 }}>
-          <a href="/login">
-          <Button color="primary" fullWidth onClick={Logoutuser} >
+        <Box sx={{ m: 1 }} className='user-item'>
+          <a href="/login" className='user-item'>
+          <Button color="primary" fullWidth onClick={Logoutuser} className='user-item'>
 
             <LockOpenTwoToneIcon sx={{ mr: 1 }} />
             Sign out
