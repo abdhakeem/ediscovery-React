@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-import PageHeader from './PageHeader';
+import TableHeader from './PageHeader';
 import PageTitleWrapper from 'src/components/PageTitleWrapper';
 import { Grid, Container } from '@mui/material';
 import Footer from 'src/components/Footer';
@@ -141,15 +141,13 @@ const onSelectionChanged=(event)=>{
         <title>Inabia - eDiscovery</title>
       </Helmet>
       <PageTitleWrapper>
-      <div data-v-4fb88474="" className="HeaderContent center-content">      
-        <div className="HeaderContent-container">
-                  <h1 className="HeaderContent-title" >Welcome to Inabia Ebot</h1>
-                  <h3 className="HeaderContent-paragraph">Create new cases and extract results</h3>
-        </div>
-      </div> 
-        <PageHeader />
-
-      
+        <div data-v-4fb88474="" className="HeaderContent center-content">      
+          <div className="HeaderContent-container">
+            <h1 className="HeaderContent-title" >Welcome to Inabia Ebot</h1>
+            <h3 className="HeaderContent-paragraph">Create new cases and extract results</h3>
+          </div>
+        </div> 
+        <TableHeader noOfCases={rowData.length}/>
       </PageTitleWrapper>
       <Container maxWidth="lg">
         <Grid

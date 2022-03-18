@@ -38,7 +38,6 @@ const SidebarLayout: FC<SidebarLayoutProps> = () => {
       <MainWrapper>
         <Header />
         <MainContent>
-          <Breadcrumbs />
           <Outlet />
         </MainContent>
       </MainWrapper>

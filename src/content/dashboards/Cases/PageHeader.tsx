@@ -305,7 +305,7 @@ SimpleDialog.propTypes = {
   selectedValue: PropTypes.string.isRequired,
 };
 
-function Modals() {
+function Modals(props: { noOfCases: number}) {
 
   const [open, setOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState(emails[1]);
@@ -328,7 +328,7 @@ function Modals() {
       justifyContent="space-between"
       sx={{ pb: 3 }}
       >
-        <Typography variant="h3" className='page-title'>Cases</Typography>
+        <Typography variant="h3" className='page-title'>Your Cases ({ props.noOfCases })</Typography>
         <Button
           size="medium"
           onClick={handleClickOpen}
@@ -360,5 +360,9 @@ function Modals() {
     </>
   );
 }
+
+Modals.propTypes = {
+  noOfCases: PropTypes.number.isRequired,
+};
 
 export default Modals;

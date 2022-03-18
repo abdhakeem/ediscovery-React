@@ -102,7 +102,7 @@ function Logo() {
 
   return (
     <LogoWrapper to="/dashboards/cases" className='Logoredirect'>
-      <LogoSignWrapper style={{marginRight: 50, marginBottom: 10 }}>
+      <LogoSignWrapper style={{marginLeft: 24, marginRight: 50, marginBottom: 20 }}>
       <img
         alt="Inabia ediscovery"
         height={70}
@@ -110,7 +110,7 @@ function Logo() {
           />
   
       </LogoSignWrapper>
-      <Hidden smDown>
+      <Hidden mdDown>
         <LogoTextWrapper style={{ paddingTop: 10 }}>
           <Tooltip title="Version 1.1.0" arrow placement="right" >
             <VersionBadge>1.0</VersionBadge>
