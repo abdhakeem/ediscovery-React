@@ -6,7 +6,7 @@ import { useEffect, useMemo, useState, useRef } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
 import { CellClickedEvent } from 'ag-grid-community';
-import { useNavigate, useParams } from 'react-router';
+import { useNavigate } from 'react-router';
 import { defaultColDef, columnDefs, sideBar } from './constants';
 import AddCaseDialog from './AddCaseDialog';
 function DashboardLogin() {
@@ -15,21 +15,32 @@ function DashboardLogin() {
   localStorage.removeItem('pcaseId');
   localStorage.removeItem('caseIds');
 
+  const [gridApi, setGridApi] = useState(null);
   const [rowData, setRowData] = useState(null);
-  const gridRef = useRef(null);
   //const props = [];
 
   const enableFillHandle = true;
 
   let navigate = useNavigate();
-  useEffect(() => {
-    fetch(
+
+  const onGridReady = (params) => {
+    setGridApi(params.api);
+  };
+  const fetchCasesData = async () => {
+    if (gridApi) gridApi.showLoadingOverlay();
+    const response = await fetch(
       'https://ediscovery.inabia.ai/api/getcases?userId=' +
         userId +
         '&type=Cases&caseId=5&fileId=215'
-    )
-      .then((result) => result.json())
-      .then((rowData) => setRowData(rowData));
+    );
+    const rowData = await response.json();
+    if (gridApi) gridApi.hideOverlay();
+
+    setRowData(rowData);
+  };
+
+  useEffect(() => {
+    fetchCasesData();
   }, []);
 
   const onCellClicked = (params: CellClickedEvent) => {
@@ -70,6 +81,7 @@ function DashboardLogin() {
 
   const handleClose = (value) => {
     setShowCaseDialog(false);
+    fetchCasesData();
   };
 
   return (
@@ -104,7 +116,6 @@ function DashboardLogin() {
         </Box>
         <div className="ag-theme-alpine" style={{ height: 600, width: '100%' }}>
           <AgGridReact
-            ref={gridRef}
             rowData={rowData}
             columnDefs={columnDefs}
             rowSelection="multiple"
@@ -125,7 +136,7 @@ function DashboardLogin() {
             sideBar={sideBar}
             onCellClicked={onCellClicked}
             onSelectionChanged={onSelectionChanged}
-
+            onGridReady={onGridReady}
             // rowDragManaged={true}  //Doesn't work with pagination
           />
         </div>

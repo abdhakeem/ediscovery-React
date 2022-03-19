@@ -93,10 +93,10 @@ const reducer = (state: State, action: Action): State => {
 };
 
 function AddCaseDialog(props) {
-  const { onClose, selectedValue, open } = props;
+  const { onClose, open } = props;
 
   const handleClose = () => {
-    onClose(selectedValue);
+    onClose();
   };
 
   const handleListItemClick = (value) => {};
@@ -338,8 +338,7 @@ function AddCaseDialog(props) {
 
 AddCaseDialog.propTypes = {
   onClose: PropTypes.func.isRequired,
-  open: PropTypes.bool.isRequired,
-  selectedValue: PropTypes.string.isRequired
+  open: PropTypes.bool.isRequired
 };
 
 export default AddCaseDialog;
