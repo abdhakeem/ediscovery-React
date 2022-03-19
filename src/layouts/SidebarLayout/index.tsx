@@ -5,7 +5,6 @@ import { Outlet } from 'react-router-dom';
 
 // import Sidebar from './Sidebar';
 import Header from './Header';
-import { default as Breadcrumbs } from './Breadcrumbs';
 
 interface SidebarLayoutProps {
   children?: ReactNode;
@@ -36,7 +35,6 @@ const SidebarLayout: FC<SidebarLayoutProps> = () => {
       <MainWrapper>
         <Header />
         <MainContent>
-          <Breadcrumbs />
           <Outlet />
         </MainContent>
       </MainWrapper>

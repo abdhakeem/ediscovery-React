@@ -1,14 +1,14 @@
 import { Box, Button, Container, Typography } from '@mui/material';
 import Footer from 'src/components/Footer';
-
-import { useEffect, useMemo, useState, useRef } from 'react';
-
+import { useEffect, useMemo, useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
 import { CellClickedEvent } from 'ag-grid-community';
 import { useNavigate } from 'react-router';
 import { defaultColDef, columnDefs, sideBar } from './constants';
 import AddCaseDialog from './AddCaseDialog';
+import MyCasesBc from './breadcrumb';
+import { eDiscoveryUrl } from 'src/common/routes';
 function DashboardLogin() {
   const userId = localStorage.getItem('userId');
   localStorage.removeItem('pdocid');
@@ -44,7 +44,7 @@ function DashboardLogin() {
   }, []);
 
   const onCellClicked = (params: CellClickedEvent) => {
-    let path = '/dashboards/documents/' + params.data.id;
+    let path = `${eDiscoveryUrl.Case}/${params.data.id}`;
     navigate(path);
   };
 
@@ -86,6 +86,7 @@ function DashboardLogin() {
 
   return (
     <>
+      <MyCasesBc />
       <Container>
         <div data-v-4fb88474="" className="HeaderContent center-content">
           <div className="HeaderContent-container">
@@ -102,7 +103,7 @@ function DashboardLogin() {
           sx={{ mb: 4 }}
         >
           <Typography variant="h3" className="page-title">
-            Your Cases ({rowData ? rowData.length : '0'})
+            My Cases ({rowData ? rowData.length : '0'})
           </Typography>
           <Button
             size="medium"

@@ -15,15 +15,15 @@ import 'ag-grid-enterprise';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 
-
 import 'src/style.css';
 import { CellClickedEvent } from 'ag-grid-community';
 import id from 'date-fns/esm/locale/id/index.js';
 import { useNavigate, useParams } from 'react-router';
+import DocumentBc from './breadcrumb';
+import { eDiscoveryUrl } from 'src/common/routes';
 
 function DashboardLogin() {
-
-  const {caseid} = useParams();
+  const { caseid } = useParams();
   localStorage.setItem('pcaseId', caseid);
   localStorage.removeItem('caseIds');
   localStorage.removeItem('pdocid');
@@ -34,120 +34,154 @@ function DashboardLogin() {
   const defaultColDef = {
     // set filtering on for all columns
     filter: true,
-    resizable: true,
+    resizable: true
   };
-
-
 
   const customActions = function () {
     return '<span><a routerLink="/apps/your-path"><i class="users-edit-icon feather icon-edit-1 mr-50"></i></a><i class="users-delete-icon feather icon-trash-2"></i></span>';
   };
 
-  
-
   const [columnDefs] = useState([
     //{ field: "make", sortable: true, filter: true, checkboxSelection: true, floatingFilter: true, rowGroup: false, rowDrag: false, width: 300 },
-    { headerName: 'S. NO', field: "id", sortable: true, filter: true, floatingFilter: true, rowGroup: false, rowDrag: false, width: 150 },
-    { headerName: 'DOCUMENT NAME', field: "collectionname", sortable: true, filter: true, floatingFilter: true, width: 400},
-    { headerName: 'UPLOADED ON', field: "created_at", sortable: true, filter: true, floatingFilter: true, width: 400},
-    { headerName: 'STATUS', field: "status", sortable: true, filter: true, floatingFilter: true, width: 250,
-    // cellRenderer: function(params) {
-        
-    //   const status = params.data.status;
-    //   var final:any = '';
+    {
+      headerName: 'S. NO',
+      field: 'id',
+      sortable: true,
+      filter: true,
+      floatingFilter: true,
+      rowGroup: false,
+      rowDrag: false,
+      width: 150
+    },
+    {
+      headerName: 'DOCUMENT NAME',
+      field: 'collectionname',
+      sortable: true,
+      filter: true,
+      floatingFilter: true,
+      width: 400
+    },
+    {
+      headerName: 'UPLOADED ON',
+      field: 'created_at',
+      sortable: true,
+      filter: true,
+      floatingFilter: true,
+      width: 400
+    },
+    {
+      headerName: 'STATUS',
+      field: 'status',
+      sortable: true,
+      filter: true,
+      floatingFilter: true,
+      width: 250
+      // cellRenderer: function(params) {
 
-    //   if(status === 'Completed') {
-    //     final = <span className="badge bg-green me-1"></span>;
-    //   }
+      //   const status = params.data.status;
+      //   var final:any = '';
 
-    //   else if(status === 'Processing') {
-    //     final = <span className="badge bg-orange me-1">Processing</span>;
-    //   }
+      //   if(status === 'Completed') {
+      //     final = <span className="badge bg-green me-1"></span>;
+      //   }
 
-    //   else if(status === 'Error') {
-    //     final = <span className="badge bg-red me-1">Error</span>;
-    //   }
-    // }
-  },
+      //   else if(status === 'Processing') {
+      //     final = <span className="badge bg-orange me-1">Processing</span>;
+      //   }
 
-]);   
-   
-    const enableFillHandle = true;
+      //   else if(status === 'Error') {
+      //     final = <span className="badge bg-red me-1">Error</span>;
+      //   }
+      // }
+    }
+  ]);
 
-   useEffect(() => {
-          //fetch('https://www.ag-grid.com/example-assets/row-data.json')
-          fetch('https://ediscovery.inabia.ai/api/getcases?userId='+userId+'&type=Docs&caseId='+caseid+'&fileId=')
-           .then(result => result.json())
-           .then(rowData => setRowData(rowData))
-         
-   }, []);
+  const enableFillHandle = true;
+
+  useEffect(() => {
+    //fetch('https://www.ag-grid.com/example-assets/row-data.json')
+    fetch(
+      'https://ediscovery.inabia.ai/api/getcases?userId=' +
+        userId +
+        '&type=Docs&caseId=' +
+        caseid +
+        '&fileId='
+    )
+      .then((result) => result.json())
+      .then((rowData) => setRowData(rowData));
+  }, []);
 
   console.log(rowData);
   // const onCellClicked = (params: CellClickedEvent ) => alert(params.data.id);
 
-  let navigate = useNavigate(); 
+  let navigate = useNavigate();
 
-  const onCellClicked = (params: CellClickedEvent ) => { 
-    let path = '/dashboards/files/'+ caseid +'/'+ params.data.id; 
+  const onCellClicked = (params: CellClickedEvent) => {
+    let path = '/dashboards/files/' + caseid + '/' + params.data.id;
     navigate(path);
   };
 
-  // const routeChange = () =>{ 
-  //   let path = '/dashboards/documents/57'; 
+  // const routeChange = () =>{
+  //   let path = '/dashboards/documents/57';
   //   navigate(path);
   // }
   //  const onCellClicked = (params: CellClickedEvent ) => alert(rowData[0]['caseId']);
 
-  //     const onButtonClick = e => 
+  //     const onButtonClick = e =>
   //     const selectedNodes = gridRef.current.api.getSelectedNodes()
   //     const selectedData = selectedNodes.map( node => node.data )
   //     const selectedDataStringPresentation = selectedData.map( node => `${node.make} ${node.model}`).join(', ')
   //     alert(`Selected nodes: ${selectedDataStringPresentation}`)
   // }
-  
-  const autoGroupColumnDef = useMemo(()=> ({
-        filter: true,
-          // supplies 'country' values to the filter 
-        filterValueGetter: params => params.data.model,  
-        field: "model", // show model in group column at leaf levels
-        cellRendererParams: {
-        checkbox: true // put in checkbox selection in group column
-         }
-     }), [])
 
-  const groupDisplayType = 'singleColumn';   
+  const autoGroupColumnDef = useMemo(
+    () => ({
+      filter: true,
+      // supplies 'country' values to the filter
+      filterValueGetter: (params) => params.data.model,
+      field: 'model', // show model in group column at leaf levels
+      cellRendererParams: {
+        checkbox: true // put in checkbox selection in group column
+      }
+    }),
+    []
+  );
+
+  const groupDisplayType = 'singleColumn';
 
   //const sideBar = true;
 
   const sideBar = {
     toolPanels: [
-        {
-            id: 'columns',
-            labelDefault: 'Columns',
-            labelKey: 'columns',
-            iconKey: 'columns',
-            toolPanel: 'agColumnsToolPanel',
-        },
-        {
-            id: 'filters',
-            labelDefault: 'Filters',
-            labelKey: 'filters',
-            iconKey: 'filter',
-            toolPanel: 'agFiltersToolPanel',
-        }
+      {
+        id: 'columns',
+        labelDefault: 'Columns',
+        labelKey: 'columns',
+        iconKey: 'columns',
+        toolPanel: 'agColumnsToolPanel'
+      },
+      {
+        id: 'filters',
+        labelDefault: 'Filters',
+        labelKey: 'filters',
+        iconKey: 'filter',
+        toolPanel: 'agFiltersToolPanel'
+      }
     ],
-    defaultToolPanel: '',
-};
-
+    defaultToolPanel: ''
+  };
 
   return (
     <>
       <Helmet>
         <title>Inabia - eDiscovery</title>
       </Helmet>
+      <DocumentBc
+        caseName={`Case ${caseid}`}
+        caseUrl={`${eDiscoveryUrl.Case}/${caseid}`}
+      />
       <PageTitleWrapper>
         <PageHeader />
-
       </PageTitleWrapper>
       <Container maxWidth="lg">
         <Grid
@@ -158,8 +192,11 @@ function DashboardLogin() {
           spacing={3}
         >
           <Grid item lg={12} xs={12}>
-          <div className="ag-theme-alpine" style={{height: 600, width: '100%'}}>
-          <AgGridReact
+            <div
+              className="ag-theme-alpine"
+              style={{ height: 600, width: '100%' }}
+            >
+              <AgGridReact
                 ref={gridRef}
                 rowData={rowData}
                 columnDefs={columnDefs}
@@ -180,14 +217,11 @@ function DashboardLogin() {
                 groupDisplayType={groupDisplayType}
                 sideBar={sideBar}
                 onCellClicked={onCellClicked}
-                
+
                 // rowDragManaged={true}  //Doesn't work with pagination
-        
-                >
-           </AgGridReact>
-        </div>
-      
-            </Grid>
+              ></AgGridReact>
+            </div>
+          </Grid>
         </Grid>
       </Container>
       <Footer />
