@@ -5,8 +5,7 @@ import { Outlet } from 'react-router-dom';
 
 // import Sidebar from './Sidebar';
 import Header from './Header';
-import Breadcrumbs from './Breadcrumbs';
-
+import { default as Breadcrumbs } from './Breadcrumbs';
 
 interface SidebarLayoutProps {
   children?: ReactNode;
@@ -26,7 +25,7 @@ const MainWrapper = styled(Box)(
 
 const MainContent = styled(Box)(
   ({ theme }) => `
-        margin-top: ${theme.header.height};
+        margin-top: 104px;
         flex: 1 1 auto;
 `
 );
@@ -34,10 +33,10 @@ const MainContent = styled(Box)(
 const SidebarLayout: FC<SidebarLayoutProps> = () => {
   return (
     <>
-      {/* <Sidebar /> */}
       <MainWrapper>
         <Header />
         <MainContent>
+          <Breadcrumbs />
           <Outlet />
         </MainContent>
       </MainWrapper>
