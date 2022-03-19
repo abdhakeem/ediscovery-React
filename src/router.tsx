@@ -6,6 +6,7 @@ import SidebarLayout from 'src/layouts/SidebarLayout';
 import BaseLayout from 'src/layouts/BaseLayout';
 
 import SuspenseLoader from 'src/components/SuspenseLoader';
+import AccountSettings from './content/pages/Settings';
 
 const Loader = (Component) => (props) =>
   (
@@ -140,6 +141,16 @@ const routes: PartialRouteObject[] = [
       {
         path: 'view/:caseid/:docid/:fileid/:filename',
         element: <View />
+      }
+    ]
+  },
+  {
+    path: 'settings',
+    element: <SidebarLayout />,
+    children: [
+      {
+        path: '/',
+        element: <AccountSettings />
       }
     ]
   }

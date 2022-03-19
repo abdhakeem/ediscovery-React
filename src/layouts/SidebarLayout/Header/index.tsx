@@ -2,11 +2,12 @@ import { useContext, useState } from 'react';
 import { useTheme } from '@material-ui/core/styles';
 import { Box, Hidden, Tab, Tabs } from '@mui/material';
 import { styled } from '@mui/material/styles';
-
+import { Link } from 'react-router-dom';
 import HeaderMenu from './Menu';
 import Logo from 'src/components/Logo';
 
 import styles from './header.module.scss';
+import { eDiscoveryUrl } from 'src/common/routes';
 
 const HeaderWrapper = styled(Box)(
   ({ theme }) => `
@@ -26,6 +27,9 @@ function Header() {
   const theme = useTheme();
   const handleChange = (_event: React.SyntheticEvent, value: number) => {
     setSelectedTab(value);
+  };
+  const handleLogout = () => {
+    localStorage.clear();
   };
   return (
     <HeaderWrapper display="flex" alignItems="center">
@@ -53,9 +57,28 @@ function Header() {
             value={selectedTab}
             onChange={handleChange}
           >
-            <Tab className={styles.tab} id="1" label="My Cases" />
-            <Tab className={styles.tab} id="2" label="Settings" />
-            <Tab className={styles.tab} id="3" label="Logout" />
+            <Tab
+              className={styles.tab}
+              id="1"
+              label="My Cases"
+              to={eDiscoveryUrl.MyCases}
+              component={Link}
+            />
+            <Tab
+              className={styles.tab}
+              id="2"
+              label="Settings"
+              to={eDiscoveryUrl.AccSettings}
+              component={Link}
+            />
+            <Tab
+              className={styles.tab}
+              id="3"
+              label="Logout"
+              to="/"
+              onClick={handleLogout}
+              component={Link}
+            />
           </Tabs>
         </Box>
       </Box>
