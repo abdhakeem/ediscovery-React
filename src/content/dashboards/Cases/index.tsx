@@ -82,7 +82,7 @@ function DashboardLogin() {
   const handleClose = (status: AddCaseStatus) => {
     setShowCaseDialog(false);
 
-    if (status !== AddCaseStatus.NoStatus) fetchCasesData();
+    fetchCasesData();
   };
 
   return (

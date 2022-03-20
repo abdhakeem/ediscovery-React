@@ -11,7 +11,7 @@ import {
   Collapse
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import Button from '@mui/material/Button';
+import LoadingButton from '@mui/lab/LoadingButton';
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
 import TextField from '@mui/material/TextField';
@@ -39,7 +39,7 @@ function AddCaseDialog(props: AddCaseDialogType) {
     register,
     handleSubmit,
     reset,
-    formState: { errors }
+    formState: { errors, isSubmitting }
   } = useForm({ mode: 'onChange' });
 
   const [showAlert, setShowAlert] = useState<boolean>(false);
@@ -61,6 +61,8 @@ function AddCaseDialog(props: AddCaseDialogType) {
   };
 
   const onSubmit = async (data) => {
+    //Clear previous alert message if any
+    setShowAlert(false);
     const params = { ...data };
     const id = localStorage.getItem('userId');
     const token = localStorage.getItem('token');
@@ -104,7 +106,7 @@ function AddCaseDialog(props: AddCaseDialogType) {
         <Card>
           <Divider />
           <CardContent>
-            <Collapse in={showAlert} addEndListener={() => setAlertMessage({})}>
+            <Collapse in={showAlert}>
               <Alert severity={alertMessage.type}>{alertMessage.message}</Alert>
             </Collapse>
             <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
@@ -161,14 +163,15 @@ function AddCaseDialog(props: AddCaseDialogType) {
                   helperText={errors?.description?.message}
                 />
               </div>
-              <Button
+              <LoadingButton
+                loading={isSubmitting}
                 size="medium"
                 variant="text"
                 className="theme-btn submit"
                 type="submit"
               >
                 ADD NEW CASE
-              </Button>
+              </LoadingButton>
             </form>
           </CardContent>
         </Card>
