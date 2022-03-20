@@ -72,18 +72,16 @@ function AddCaseDialog(props: AddCaseDialogType) {
 
       if (message !== SUCCESS_MSG) {
         displayAlert(AlertMessageType.Error, message);
-        return Promise.reject();
+        return Promise.reject(message);
       }
 
       reset();
       displayAlert(AlertMessageType.Success, message);
       return Promise.resolve();
     } catch (error) {
-      displayAlert(
-        AlertMessageType.Error,
-        'Unable to proceed with your request'
-      );
-      return Promise.reject();
+      const ERROR_MSG = 'Unable to proceed with your request';
+      displayAlert(AlertMessageType.Error, ERROR_MSG);
+      return Promise.reject(ERROR_MSG);
     }
   };
 
