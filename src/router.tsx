@@ -7,6 +7,7 @@ import BaseLayout from 'src/layouts/BaseLayout';
 
 import SuspenseLoader from 'src/components/SuspenseLoader';
 import AccountSettings from './content/pages/Settings';
+import ProtectedRoute from './components/ProtectedRoute';
 
 const Loader = (Component) => (props) =>
   (
@@ -104,7 +105,11 @@ const routes: PartialRouteObject[] = [
   },
   {
     path: 'dashboards',
-    element: <SidebarLayout />,
+    element: (
+      <ProtectedRoute>
+        <SidebarLayout />
+      </ProtectedRoute>
+    ),
     children: [
       {
         path: '/',
@@ -146,7 +151,11 @@ const routes: PartialRouteObject[] = [
   },
   {
     path: 'settings',
-    element: <SidebarLayout />,
+    element: (
+      <ProtectedRoute>
+        <SidebarLayout />
+      </ProtectedRoute>
+    ),
     children: [
       {
         path: '/',
