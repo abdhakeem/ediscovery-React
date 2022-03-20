@@ -60,17 +60,10 @@ function AddCaseDialog(props: AddCaseDialogType) {
     }, 5000);
   };
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (params) => {
     //Clear previous alert message if any
     setShowAlert(false);
-    const params = { ...data };
-    const id = localStorage.getItem('userId');
-    const token = localStorage.getItem('token');
 
-    params.token = token;
-    params.userId = id;
-
-    console.log(params);
     try {
       const res = await Axios.post(API.AddCase, {}, { params });
       const message = res.data.Response.Data;
@@ -97,7 +90,7 @@ function AddCaseDialog(props: AddCaseDialogType) {
   return (
     <Dialog onClose={handleClose} open={open}>
       <DialogTitle className={styles.dialogTitle}>
-        <h3>Add New Case </h3>
+        <b>Add New Case </b>
         <IconButton className={styles.closeIcon} onClick={handleClose}>
           <CloseIcon />
         </IconButton>
@@ -112,7 +105,7 @@ function AddCaseDialog(props: AddCaseDialogType) {
             <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
               <div>
                 <TextField
-                  error={errors.projectname}
+                  error={!!errors.projectname}
                   {...register('projectname', {
                     required: 'Please enter case name'
                   })}
@@ -125,7 +118,7 @@ function AddCaseDialog(props: AddCaseDialogType) {
                 />
 
                 <TextField
-                  error={errors.caseId}
+                  error={!!errors.caseId}
                   {...register('caseId', {
                     required: 'Please enter a case id'
                   })}
@@ -138,7 +131,7 @@ function AddCaseDialog(props: AddCaseDialogType) {
                 />
 
                 <TextField
-                  error={errors.company}
+                  error={!!errors.company}
                   {...register('company', {
                     required: 'Please enter company name'
                   })}
@@ -151,7 +144,7 @@ function AddCaseDialog(props: AddCaseDialogType) {
                 />
 
                 <TextField
-                  error={errors.description}
+                  error={!!errors.description}
                   {...register('description', {
                     required: 'Please enter description'
                   })}

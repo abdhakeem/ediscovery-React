@@ -7,6 +7,19 @@ export const Axios = axios.create({
   }
 });
 
+Axios.interceptors.request.use((config) => {
+  const userId = localStorage.getItem('userId');
+  const token = localStorage.getItem('token');
+  if (userId && token) {
+    config.params = {
+      userId,
+      token,
+      ...config.params
+    };
+  }
+  return config;
+});
+
 export enum API {
   AddCase = '/addcase'
 }
