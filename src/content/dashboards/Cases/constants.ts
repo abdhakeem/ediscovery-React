@@ -1,4 +1,4 @@
-//Store stateless constants/variables and stateless functions here
+//Store stateless constant items/variables and stateless functions here
 
 export const defaultColDef = {
   // set filtering on for all columns

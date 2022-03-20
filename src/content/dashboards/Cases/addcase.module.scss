@@ -1,0 +1,11 @@
+.dialogTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.closeIcon:global(.MuiButtonBase-root):hover {
+  :global(.MuiSvgIcon-root) {
+    color: #969595 !important;
+  }
+}

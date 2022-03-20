@@ -40,6 +40,7 @@
     "react-dropzone": "^12.0.4",
     "react-google-button": "^0.7.2",
     "react-helmet-async": "1.1.2",
+    "react-hook-form": "^7.28.0",
     "react-pdf": "^5.7.1",
     "react-redirect": "^1.0.0",
     "react-router": "6.0.0-beta.0",
