@@ -5,7 +5,7 @@ import { styled } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
 import HeaderMenu from './Menu';
 import Logo from 'src/components/Logo';
-
+import { useMatch } from 'react-router';
 import styles from './header.module.scss';
 import { eDiscoveryUrl } from 'src/common/routes';
 
@@ -23,7 +23,8 @@ const HeaderWrapper = styled(Box)(
 );
 
 function Header() {
-  const [selectedTab, setSelectedTab] = useState<number>(0);
+  const match = useMatch({ path: eDiscoveryUrl.Dashboard, end: false });
+  const [selectedTab, setSelectedTab] = useState<number>(match ? 0 : 1);
   const theme = useTheme();
   const handleChange = (_event: React.SyntheticEvent, value: number) => {
     setSelectedTab(value);

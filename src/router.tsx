@@ -8,6 +8,7 @@ import BaseLayout from 'src/layouts/BaseLayout';
 import SuspenseLoader from 'src/components/SuspenseLoader';
 import AccountSettings from './content/pages/Settings';
 import ProtectedRoute from './components/ProtectedRoute';
+import { Page } from './common/routes';
 
 const Loader = (Component) => (props) =>
   (
@@ -60,7 +61,7 @@ const routes: PartialRouteObject[] = [
         element: <Authentication />
       },
       {
-        path: 'login',
+        path: Page.Login,
         element: <Authentication />
       },
       {
@@ -104,7 +105,7 @@ const routes: PartialRouteObject[] = [
     ]
   },
   {
-    path: 'dashboards',
+    path: Page.Dashboard,
     element: (
       <ProtectedRoute>
         <SidebarLayout />
@@ -113,18 +114,14 @@ const routes: PartialRouteObject[] = [
     children: [
       {
         path: '/',
-        element: <Navigate to="/dashboards/cases" replace />
+        element: <Navigate to={Page.MyCases} replace />
       },
       {
-        path: 'cases',
+        path: Page.MyCases,
         element: <Cases />
       },
       {
-        path: 'cases/:token',
-        element: <Cases />
-      },
-      {
-        path: 'case/:caseid',
+        path: `${Page.Case}/:caseid`,
         element: <Documents />
       },
       {
@@ -150,7 +147,7 @@ const routes: PartialRouteObject[] = [
     ]
   },
   {
-    path: 'settings',
+    path: Page.AccSettings,
     element: (
       <ProtectedRoute>
         <SidebarLayout />
