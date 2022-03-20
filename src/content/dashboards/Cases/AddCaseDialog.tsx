@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import { useState } from 'react';
 
 import {
   Grid,
@@ -7,91 +7,88 @@ import {
   CardContent,
   Divider,
   Alert,
-  IconButton
+  IconButton,
+  Collapse
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import Button from '@mui/material/Button';
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
 import TextField from '@mui/material/TextField';
-import 'src/http-common.ts';
-import axios from 'axios';
 import { useForm } from 'react-hook-form';
-
+import { Axios, API } from 'src/common/api';
+import { AddCaseStatus } from './constants';
 import styles from './addcase.module.scss';
 
-function AddCaseDialog(props) {
+type AddCaseDialogType = {
+  onClose: (status: AddCaseStatus) => void;
+  open: boolean;
+};
+
+enum AlertMessageType {
+  Success = 'success',
+  Error = 'error'
+}
+
+type AlertMessage = { type?: AlertMessageType; message?: string };
+
+function AddCaseDialog(props: AddCaseDialogType) {
   const { onClose, open } = props;
+
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitSuccessful }
+    formState: { errors }
   } = useForm({ mode: 'onChange' });
 
+  const [showAlert, setShowAlert] = useState<boolean>(false);
+  const [alertMessage, setAlertMessage] = useState<AlertMessage>({});
+
   const handleClose = () => {
-    onClose();
+    onClose(AddCaseStatus.NoStatus);
     reset();
   };
 
-  const onSubmit = (data) => {
-    const casename = data.casename;
-    const caseid = data.caseid;
-    const company = data.company;
-    const description = data.description;
+  const displayAlert = (type: AlertMessageType, message: string) => {
+    setShowAlert(true);
+    setAlertMessage({ type, message });
+
+    // Hide alert after 5 seconds
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 5000);
+  };
+
+  const onSubmit = async (data) => {
+    const params = { ...data };
     const id = localStorage.getItem('userId');
     const token = localStorage.getItem('token');
 
-    console.log(
-      id +
-        '==>' +
-        token +
-        '==>' +
-        casename +
-        '==>' +
-        caseid +
-        '==>' +
-        company +
-        '==>' +
-        description
-    );
+    params.token = token;
+    params.userId = id;
 
-    //API Call
-    getData();
+    console.log(params);
+    try {
+      const res = await Axios.post(API.AddCase, {}, { params });
+      const message = res.data.Response.Data;
 
-    // we will use async/await to fetch this data
-    async function getData() {
-      axios
-        .post(
-          'https://ediscovery.inabia.ai/api/addcase?projectname=' +
-            casename +
-            '&caseId=' +
-            caseid +
-            '&company=' +
-            company +
-            '&description=' +
-            description +
-            '&token=' +
-            token +
-            '&userId=' +
-            id +
-            ''
-        )
-        .then((res) => {
-          console.log(res.data);
+      const SUCCESS_MSG = 'Case created successfully';
 
-          const loginstatus = res.data.Response.Data;
+      if (message !== SUCCESS_MSG) {
+        displayAlert(AlertMessageType.Error, message);
+        return Promise.reject();
+      }
 
-          if (loginstatus !== 'Case created successfully') {
-            alert('Login failed');
-            return Promise.reject();
-          } else if (loginstatus === 'Case created successfully') {
-            return Promise.resolve();
-          } else {
-            alert('Unable to proceed your request');
-            return Promise.reject();
-          }
-        });
+      reset();
+      displayAlert(AlertMessageType.Success, message);
+      return Promise.resolve();
+    } catch (error) {
+      displayAlert(
+        AlertMessageType.Error,
+        'Unable to proceed with your request'
+      );
+      return Promise.reject();
     }
   };
 
@@ -107,16 +104,14 @@ function AddCaseDialog(props) {
         <Card>
           <Divider />
           <CardContent>
-            {isSubmitSuccessful ? (
-              <Alert severity="success">Case created succesfully.</Alert>
-            ) : (
-              false
-            )}
+            <Collapse in={showAlert} addEndListener={() => setAlertMessage({})}>
+              <Alert severity={alertMessage.type}>{alertMessage.message}</Alert>
+            </Collapse>
             <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
               <div>
                 <TextField
-                  error={errors.casename}
-                  {...register('casename', {
+                  error={errors.projectname}
+                  {...register('projectname', {
                     required: 'Please enter case name'
                   })}
                   label="Case Name"
@@ -124,12 +119,12 @@ function AddCaseDialog(props) {
                   placeholder="Enter Case Name"
                   InputLabelProps={{ shrink: true }}
                   className="Cases-field"
-                  helperText={errors?.casename?.message}
+                  helperText={errors?.projectname?.message}
                 />
 
                 <TextField
-                  error={errors.caseid}
-                  {...register('caseid', {
+                  error={errors.caseId}
+                  {...register('caseId', {
                     required: 'Please enter a case id'
                   })}
                   label="Case ID"
