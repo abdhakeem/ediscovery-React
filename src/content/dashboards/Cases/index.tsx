@@ -9,6 +9,7 @@ import { defaultColDef, columnDefs, sideBar, AddCaseStatus } from './constants';
 import AddCaseDialog from './AddCaseDialog';
 import MyCasesBc from './breadcrumb';
 import { eDiscoveryUrl } from 'src/common/routes';
+import Axios, { API } from 'src/common/api';
 function DashboardLogin() {
   const userId = localStorage.getItem('userId');
   localStorage.removeItem('pdocid');
@@ -28,14 +29,10 @@ function DashboardLogin() {
   };
   const fetchCasesData = async () => {
     if (gridApi) gridApi.showLoadingOverlay();
-    const response = await fetch(
-      'https://ediscovery.inabia.ai/api/getcases?userId=' +
-        userId +
-        '&type=Cases&caseId=5&fileId=215'
-    );
-    const rowData = await response.json();
-    if (gridApi) gridApi.hideOverlay();
+    const params = { type: 'Cases' };
+    const { data: rowData } = await Axios.get(API.GetCases, { params });
 
+    if (gridApi) gridApi.hideOverlay();
     setRowData(rowData);
   };
 

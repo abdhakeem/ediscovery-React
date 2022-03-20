@@ -21,7 +21,8 @@ Axios.interceptors.request.use((config) => {
 });
 
 export enum API {
-  AddCase = '/addcase'
+  AddCase = '/addcase',
+  GetCases = '/getcases'
 }
 
 export default Axios;
