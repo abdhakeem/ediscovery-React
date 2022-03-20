@@ -19,6 +19,7 @@ import { useForm } from 'react-hook-form';
 import { Axios, API } from 'src/common/api';
 import { AddCaseStatus } from './constants';
 import styles from './addcase.module.scss';
+import { AddCaseResp } from 'src/types/api';
 
 type AddCaseDialogType = {
   onClose: (status: AddCaseStatus) => void;
@@ -65,7 +66,7 @@ function AddCaseDialog(props: AddCaseDialogType) {
     setShowAlert(false);
 
     try {
-      const res = await Axios.post(API.AddCase, {}, { params });
+      const res = await Axios.post<AddCaseResp>(API.AddCase, {}, { params });
       const message = res.data.Response.Data;
 
       const SUCCESS_MSG = 'Case created successfully';

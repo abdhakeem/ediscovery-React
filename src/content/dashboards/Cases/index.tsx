@@ -10,14 +10,14 @@ import AddCaseDialog from './AddCaseDialog';
 import MyCasesBc from './breadcrumb';
 import { eDiscoveryUrl } from 'src/common/routes';
 import Axios, { API } from 'src/common/api';
+import { CaseObj } from 'src/types/api';
 function DashboardLogin() {
-  const userId = localStorage.getItem('userId');
   localStorage.removeItem('pdocid');
   localStorage.removeItem('pcaseId');
   localStorage.removeItem('caseIds');
 
   const [gridApi, setGridApi] = useState(null);
-  const [rowData, setRowData] = useState(null);
+  const [rowData, setRowData] = useState<CaseObj[]>(null);
   //const props = [];
 
   const enableFillHandle = true;
@@ -30,7 +30,9 @@ function DashboardLogin() {
   const fetchCasesData = async () => {
     if (gridApi) gridApi.showLoadingOverlay();
     const params = { type: 'Cases' };
-    const { data: rowData } = await Axios.get(API.GetCases, { params });
+    const { data: rowData } = await Axios.get<CaseObj[]>(API.GetCases, {
+      params
+    });
 
     if (gridApi) gridApi.hideOverlay();
     setRowData(rowData);
@@ -41,7 +43,7 @@ function DashboardLogin() {
   }, []);
 
   const onCellClicked = (params: CellClickedEvent) => {
-    let path = `${eDiscoveryUrl.Case}/${params.data.id}`;
+    let path = `${eDiscoveryUrl.Case}/${(params.data as CaseObj).id}`;
     navigate(path);
   };
 
