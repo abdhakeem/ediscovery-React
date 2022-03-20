@@ -63,3 +63,9 @@ export const sideBar = {
   ],
   defaultToolPanel: ''
 };
+
+export enum AddCaseStatus {
+  Success,
+  Failure,
+  NoStatus
+}

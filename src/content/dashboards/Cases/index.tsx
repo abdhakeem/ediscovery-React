@@ -5,7 +5,7 @@ import { AgGridReact } from 'ag-grid-react';
 import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
 import { CellClickedEvent } from 'ag-grid-community';
 import { useNavigate } from 'react-router';
-import { defaultColDef, columnDefs, sideBar } from './constants';
+import { defaultColDef, columnDefs, sideBar, AddCaseStatus } from './constants';
 import AddCaseDialog from './AddCaseDialog';
 import MyCasesBc from './breadcrumb';
 import { eDiscoveryUrl } from 'src/common/routes';
@@ -79,9 +79,10 @@ function DashboardLogin() {
     setShowCaseDialog(true);
   };
 
-  const handleClose = (value) => {
+  const handleClose = (status: AddCaseStatus) => {
     setShowCaseDialog(false);
-    fetchCasesData();
+
+    if (status !== AddCaseStatus.NoStatus) fetchCasesData();
   };
 
   return (
