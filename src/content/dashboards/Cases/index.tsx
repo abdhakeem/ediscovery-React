@@ -46,10 +46,10 @@ function DashboardLogin() {
 
    const [columnDefs] = useState([
        //{ field: "make", sortable: true, filter: true, checkboxSelection: true, floatingFilter: true, rowGroup: false, rowDrag: false, width: 300 },
-       { headerName: 'S. NO', field: "id", sortable: true, filter: true, checkboxSelection: true, floatingFilter: true, rowGroup: false, rowDrag: false, headerCheckboxSelection: true, width: 150 },
-       { headerName: 'CASE ID', field: "caseId", filter: true, floatingFilter: true, width: 400},
-       { headerName: 'CASE NAME', field: "projectname", sortable: true, filter: true, floatingFilter: true, width: 400},
-       { headerName: 'CASE CREATED (PST)', field: "created_at", sortable: true, filter: true, floatingFilter: true, width: 250 },
+       { headerName: 'S. NO', field: "id", sortable: true, filter: 'agTextColumnFilter', checkboxSelection: true,  rowGroup: false, rowDrag: false, headerCheckboxSelection: true, width: 150 },
+       { headerName: 'CASE ID', field: "caseId", filter: 'agTextColumnFilter', width: 400},
+       { headerName: 'CASE NAME', field: "projectname", sortable: true, filter: 'agTextColumnFilter',  width: 400},
+       { headerName: 'CASE CREATED (PST)', field: "created_at", sortable: true, filter: 'agTextColumnFilter', width: 250 },
 
    ]);   
 
